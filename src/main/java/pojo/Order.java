@@ -2,15 +2,16 @@ package pojo;
 
 import java.util.Date;
 
-public class order {
+public class Order {
 	
 	private int id; //id
 	private int userid;//用户id
 	private String phone;//用户手机号
 	private String icon;//图标url
-	private Date time;//创建时间
+	private String time;//创建时间
 	private String address;//地址
 	private String title;//订单标题
+	private String describe;//订单标题
 	private String type;//订单分类
 	private double money;//订单佣金
 	private String img_1;//订单详情图片1
@@ -43,10 +44,10 @@ public class order {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(Date time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	public String getAddress() {
@@ -109,6 +110,12 @@ public class order {
 	public void setState(String state) {
 		this.state = state;
 	}
+	public String getDescribe() {
+		return describe;
+	}
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
 	@Override
 	public String toString() {
 		return "order [id=" + id + ", userid=" + userid + ", phone=" + phone + ", icon=" + icon + ", time=" + time
@@ -116,6 +123,7 @@ public class order {
 				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", img_4=" + img_4 + ", img_5=" + img_5 + ", state="
 				+ state + "]";
 	}
+	
 	
 	
 	

@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 
 
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.PreparedStatement;
 
 import pojo.Merchant;
+import pojo.Order;
 import pojo.BaseDataPojo;
 
 public class MerchantDAO {
@@ -28,6 +29,7 @@ public class MerchantDAO {
 						+type
 						+"%' or industry like '%"
 						+type
+						+"%' or type like '%"
 						+"%'";
 			System.out.print(sql);
 			pst = (PreparedStatement) conn.prepareStatement(sql);
@@ -55,5 +57,36 @@ public class MerchantDAO {
 			return null;
 		}
 		
+	}
+	
+	//查询服务商
+	public ArrayList<Merchant> select(Merchant merchant){
+		try{
+			String sql = "select * from `merchant`";
+			pst = (PreparedStatement) conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			ArrayList<Merchant> rows = new ArrayList<Merchant>();
+			if(rs.next()){
+				for(int i = 0; i < rs.getRow(); i++){
+					Merchant temp = new Merchant();
+					temp.setId(rs.getInt("id"));
+					temp.setName(rs.getString("name"));
+					temp.setPhone(rs.getString("phone"));
+					temp.setTitle(rs.getString("title"));
+					temp.setType(rs.getString("type"));
+					temp.setAddress(rs.getString("address"));
+					temp.setImg(rs.getString("img"));
+					temp.setIndustry(rs.getString("industry"));
+					temp.setStar(rs.getFloat("star"));
+					
+					rows.add(temp);	
+			    	rs.next();
+				}	
+			}
+			return rows;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
