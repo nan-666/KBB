@@ -30,6 +30,7 @@ public class MerchantDAO {
 						+"%' or industry like '%"
 						+type
 						+"%' or type like '%"
+						+type
 						+"%'";
 			System.out.print(sql);
 			pst = (PreparedStatement) conn.prepareStatement(sql);
@@ -65,6 +66,39 @@ public class MerchantDAO {
 			String sql = "select * from `merchant`";
 			pst = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
+			ArrayList<Merchant> rows = new ArrayList<Merchant>();
+			if(rs.next()){
+				for(int i = 0; i < rs.getRow(); i++){
+					Merchant temp = new Merchant();
+					temp.setId(rs.getInt("id"));
+					temp.setName(rs.getString("name"));
+					temp.setPhone(rs.getString("phone"));
+					temp.setTitle(rs.getString("title"));
+					temp.setType(rs.getString("type"));
+					temp.setAddress(rs.getString("address"));
+					temp.setImg(rs.getString("img"));
+					temp.setIndustry(rs.getString("industry"));
+					temp.setStar(rs.getFloat("star"));
+					
+					rows.add(temp);	
+			    	rs.next();
+				}	
+			}
+			return rows;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	//根据id查询服务商
+	public ArrayList<Merchant> selectById(int id){
+		try{
+			String sql = "select * from `merchant` where id=?";
+			pst = (PreparedStatement) conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			
 			ArrayList<Merchant> rows = new ArrayList<Merchant>();
 			if(rs.next()){
 				for(int i = 0; i < rs.getRow(); i++){

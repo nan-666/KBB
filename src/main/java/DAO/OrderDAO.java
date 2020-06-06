@@ -67,7 +67,6 @@ public class OrderDAO {
 			if(rs.next()){
 				for(int i = 0; i < rs.getRow(); i++){
 					Order temp = new Order();
-					User user = new User();
 					temp.setId(rs.getInt("id"));
 					temp.setUserid(rs.getInt("userid"));
 					temp.setPhone(rs.getString("phone"));

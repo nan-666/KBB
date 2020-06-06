@@ -57,5 +57,28 @@ public class MerchantServiceDAO {
 		
 	}
 	
+	public ArrayList<Merchant> selectById(int id){
+		Connection conn = DButil.getConnection();
+		MerchantDAO merchantD = new MerchantDAO(conn);
+		try{
+			ArrayList<Merchant> rows = new ArrayList<Merchant>();
+			rows = merchantD.selectById(id);
+			conn.commit();
+			return rows;
+		}catch(Exception e){
+		      try {
+			        conn.rollback();
+			      } catch (SQLException e1) {
+			        e1.printStackTrace();
+			      }
+			      e.printStackTrace();
+			      return null;
+			    }finally{
+			      if(conn != null){
+			        DButil.closeConnection(conn);
+			      }
+		}
+
+	}
 
 }
