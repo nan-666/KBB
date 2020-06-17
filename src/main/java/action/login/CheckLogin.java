@@ -14,7 +14,7 @@ import pojo.BaseDataPojo;
 import pojo.LoginSession;
 import service.LoginService;
 
-@WebServlet("/main/java/login/CheckLogin")
+@WebServlet("/main/java/action/login/CheckLogin")
 public class CheckLogin extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -37,7 +37,8 @@ public class CheckLogin extends HttpServlet {
 		LoginService loginService = new LoginService();
 		int id = loginService.checkToken(token);
 		if(id != -1){
-			out.print(new Gson().toJson(new BaseDataPojo<LoginSession>("token有效",true, null)));
+			out.print(new Gson().toJson(new BaseDataPojo<LoginSession>("token有效"+id,true, null)));
+			System.out.println("token有效"+id);
 		}else{
 			out.print(new Gson().toJson(new BaseDataPojo<LoginSession>("token无效",false, null)));
 		}

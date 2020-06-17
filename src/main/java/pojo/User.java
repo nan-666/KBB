@@ -14,6 +14,14 @@ public class User {
 	private String tag;//标签
 	private String industry;//行业
 	private String type;//类型
+	private String avatarUrl;//图片路径
+	
+	public String getAvatarUrl(){
+		return avatarUrl;
+	}
+	public void setAvatarUrl(String avatarUrl){
+		this.avatarUrl=avatarUrl;
+	}
 	public int getId() {
 		return id;
 	}
@@ -84,8 +92,9 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", sex=" + sex + ", birthday="
 				+ birthday + ", phone=" + phone + ", nickname=" + nickname + ", address=" + address + ", tag=" + tag
-				+ ", industry=" + industry + ", type=" + type + "]";
+				+ ", industry=" + industry +", avatarUrl=" + avatarUrl + ", type=" + type + "]";
 	}
+	
 	
 	
 }

@@ -2,7 +2,8 @@ package pojo;
 
 import java.util.Date;
 
-public class order {
+public class order extends BaseDataPojo{
+	private static final long serialVersionUID = 1L;
 	
 	private int id; //id
 	private int userid;//用户id
