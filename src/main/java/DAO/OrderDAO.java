@@ -89,4 +89,40 @@ public class OrderDAO {
 			return null;
 		}
 	}
+
+	public int insetOrder(Order order) {
+		try{
+			String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`type`,`money`,`img_1`,`img_2`,`img_3`,`state`) value ('";
+				   sql = sql+order.getUserid()+"','";
+				   sql = sql+order.getPhone()+"','";
+				   sql = sql+order.getTime()+"','";
+				   sql = sql+order.getAddress()+"','";
+				   sql = sql+order.getDescribe()+"','";
+				   sql = sql+order.getType()+"','";
+				   sql = sql+order.getMoney()+"','";
+				   if(order.getImg_1().equals(null)){
+					   sql = sql+"/"+"','"; 
+				   }else{
+				    sql = sql+order.getImg_1()+"','";
+				   }
+				   if(order.getImg_2().equals(null)){
+					   sql = sql+"/"+"','"; 
+				   }else{
+				    sql = sql+order.getImg_2()+"','";
+				   }
+				   if(order.getImg_3().equals(null)){
+					   sql = sql+"/"+"','"; 
+				   }else{
+				    sql = sql+order.getImg_3()+"','";
+				   }
+				   sql = sql+order.getState()+"')";
+				   System.out.println(sql);
+			pst = (PreparedStatement) conn.prepareStatement(sql);
+			int rs = pst.executeUpdate();
+			return rs;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
 }

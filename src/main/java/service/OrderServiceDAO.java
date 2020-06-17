@@ -57,4 +57,32 @@ public class OrderServiceDAO {
 		}
 		
 	}
+	/**
+	 * 发布任务，提交订单
+	 * @param order
+	 * @return
+	 */
+	public int insetOrder(Order order){
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		try{
+			
+			int res = orderD.insetOrder(order);
+			conn.commit();
+			return res;
+		}catch(Exception e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return 0;
+		}finally{
+			if(conn != null){
+				DButil.closeConnection(conn);
+			}
+		}
+		
+	}
 }

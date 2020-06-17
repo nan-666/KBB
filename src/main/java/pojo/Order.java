@@ -6,9 +6,10 @@ public class Order {
 	
 	private int id; //id
 	private int userid;//用户id
+	private String name;//用户真实姓名
 	private String phone;//用户手机号
 	private String icon;//图标url
-	private String time;//创建时间
+	private String time;//服务时间
 	private String address;//地址
 	private String title;//订单标题
 	private String describe;//订单标题
@@ -116,13 +117,20 @@ public class Order {
 	public void setDescribe(String describe) {
 		this.describe = describe;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
-		return "order [id=" + id + ", userid=" + userid + ", phone=" + phone + ", icon=" + icon + ", time=" + time
-				+ ", address=" + address + ", title=" + title + ", type=" + type + ", money=" + money + ", img_1="
-				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", img_4=" + img_4 + ", img_5=" + img_5 + ", state="
-				+ state + "]";
+		return "Order [id=" + id + ", userid=" + userid + ", name=" + name + ", phone=" + phone + ", icon=" + icon
+				+ ", time=" + time + ", address=" + address + ", title=" + title + ", describe=" + describe + ", type="
+				+ type + ", money=" + money + ", img_1=" + img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", img_4="
+				+ img_4 + ", img_5=" + img_5 + ", state=" + state + "]";
 	}
+	
 	
 	
 	
