@@ -17,9 +17,7 @@ public class Order {
 	private String img_1;//订单详情图片1
 	private String img_2;//订单详情图片2
 	private String img_3;//订单详情图片3
-	private String img_4;//订单详情图片4
-	private String img_5;//订单详情图片5
-	private String state;//订单状态(0-已完成，1-正在进行中)
+	private int state;//订单状态
 	public int getId() {
 		return id;
 	}
@@ -92,22 +90,11 @@ public class Order {
 	public void setImg_3(String img_3) {
 		this.img_3 = img_3;
 	}
-	public String getImg_4() {
-		return img_4;
-	}
-	public void setImg_4(String img_4) {
-		this.img_4 = img_4;
-	}
-	public String getImg_5() {
-		return img_5;
-	}
-	public void setImg_5(String img_5) {
-		this.img_5 = img_5;
-	}
-	public String getState() {
+	
+	public int getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	public String getDescribe() {
@@ -120,7 +107,7 @@ public class Order {
 	public String toString() {
 		return "order [id=" + id + ", userid=" + userid + ", phone=" + phone + ", icon=" + icon + ", time=" + time
 				+ ", address=" + address + ", title=" + title + ", type=" + type + ", money=" + money + ", img_1="
-				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", img_4=" + img_4 + ", img_5=" + img_5 + ", state="
+				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", state="
 				+ state + "]";
 	}
 	
