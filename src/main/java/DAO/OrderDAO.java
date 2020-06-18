@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import pojo.Order;
-import pojo.User;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -42,9 +41,7 @@ public class OrderDAO {
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
-					temp.setImg_4(rs.getString("img_4"));
-					temp.setImg_5(rs.getString("img_5"));
-					temp.setState(rs.getString("state"));
+					temp.setState(rs.getInt("state"));
 					rows.add(temp);	
 			    	rs.next();
 				}	
@@ -78,7 +75,7 @@ public class OrderDAO {
 					temp.setMoney(rs.getDouble("money"));
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
-					temp.setState(rs.getString("state"));
+					temp.setState(rs.getInt("state"));
 					rows.add(temp);	
 			    	rs.next();
 				}	
@@ -90,39 +87,39 @@ public class OrderDAO {
 		}
 	}
 
-	public int insetOrder(Order order) {
-		try{
-			String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`type`,`money`,`img_1`,`img_2`,`img_3`,`state`) value ('";
-				   sql = sql+order.getUserid()+"','";
-				   sql = sql+order.getPhone()+"','";
-				   sql = sql+order.getTime()+"','";
-				   sql = sql+order.getAddress()+"','";
-				   sql = sql+order.getDescribe()+"','";
-				   sql = sql+order.getType()+"','";
-				   sql = sql+order.getMoney()+"','";
-				   if(order.getImg_1().equals(null)){
-					   sql = sql+"/"+"','"; 
-				   }else{
-				    sql = sql+order.getImg_1()+"','";
-				   }
-				   if(order.getImg_2().equals(null)){
-					   sql = sql+"/"+"','"; 
-				   }else{
-				    sql = sql+order.getImg_2()+"','";
-				   }
-				   if(order.getImg_3().equals(null)){
-					   sql = sql+"/"+"','"; 
-				   }else{
-				    sql = sql+order.getImg_3()+"','";
-				   }
-				   sql = sql+order.getState()+"')";
-				   System.out.println(sql);
-			pst = (PreparedStatement) conn.prepareStatement(sql);
-			int rs = pst.executeUpdate();
-			return rs;
-		}catch(Exception e){
-			e.printStackTrace();
-			return 0;
-		}
-	}
+    public int insetOrder(Order order) {
+        try{
+            String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`type`,`money`,`img_1`,`img_2`,`img_3`,`state`) value ('";
+            sql = sql+order.getUserid()+"','";
+            sql = sql+order.getPhone()+"','";
+            sql = sql+order.getTime()+"','";
+            sql = sql+order.getAddress()+"','";
+            sql = sql+order.getDescribe()+"','";
+            sql = sql+order.getType()+"','";
+            sql = sql+order.getMoney()+"','";
+            if(order.getImg_1().equals(null)){
+                sql = sql+"/"+"','";
+            }else{
+                sql = sql+order.getImg_1()+"','";
+            }
+            if(order.getImg_2().equals(null)){
+                sql = sql+"/"+"','";
+            }else{
+                sql = sql+order.getImg_2()+"','";
+            }
+            if(order.getImg_3().equals(null)){
+                sql = sql+"/"+"','";
+            }else{
+                sql = sql+order.getImg_3()+"','";
+            }
+            sql = sql+order.getState()+"')";
+            System.out.println(sql);
+            pst = (PreparedStatement) conn.prepareStatement(sql);
+            int rs = pst.executeUpdate();
+            return rs;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
