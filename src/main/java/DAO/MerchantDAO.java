@@ -4,6 +4,7 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -42,12 +43,15 @@ public class MerchantDAO {
 				for(int i = 0 ; i<rs.getRow();i++){
 		    		Merchant temp = new Merchant(); 
 		    		temp.setId(rs.getInt("id"));
-		    		temp.setName(rs.getString("name"));
-		    		temp.setTitle(rs.getString("title"));
-		    		temp.setImg(rs.getString("img"));
-		    		temp.setAddress(rs.getString("address"));
-		    		temp.setIndustry(rs.getString("industry"));
-		    		temp.setStar(rs.getInt("star"));
+					temp.setName(rs.getString("name"));
+					temp.setLoginpwd(rs.getString("password"));
+					temp.setPhone(rs.getString("phone"));
+					temp.setTitle(rs.getString("title"));
+					temp.setType(rs.getString("type"));
+					temp.setAddress(rs.getString("address"));
+					temp.setImg(rs.getString("img"));
+					temp.setIndustry(rs.getString("industry"));
+					temp.setStar(rs.getFloat("star"));
 			    	rows.add(temp);	
 			    	rs.next();
 		    	}
@@ -72,6 +76,7 @@ public class MerchantDAO {
 					Merchant temp = new Merchant();
 					temp.setId(rs.getInt("id"));
 					temp.setName(rs.getString("name"));
+					temp.setLoginpwd(rs.getString("password"));
 					temp.setPhone(rs.getString("phone"));
 					temp.setTitle(rs.getString("title"));
 					temp.setType(rs.getString("type"));
@@ -105,6 +110,7 @@ public class MerchantDAO {
 					Merchant temp = new Merchant();
 					temp.setId(rs.getInt("id"));
 					temp.setName(rs.getString("name"));
+					temp.setLoginpwd(rs.getString("password"));
 					temp.setPhone(rs.getString("phone"));
 					temp.setTitle(rs.getString("title"));
 					temp.setType(rs.getString("type"));
@@ -121,6 +127,19 @@ public class MerchantDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	//删除服务商
+	public boolean delete(int id) throws SQLException {
+		try {
+			String sql = "delete from `merchant` where id=?";
+			pst = (PreparedStatement)conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }

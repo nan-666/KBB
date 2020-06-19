@@ -14,14 +14,8 @@ public class User {
 	private String tag;//标签
 	private String industry;//行业
 	private String type;//类型
-	private String avatarUrl;//图片路径
-	
-	public String getAvatarUrl(){
-		return avatarUrl;
-	}
-	public void setAvatarUrl(String avatarUrl){
-		this.avatarUrl=avatarUrl;
-	}
+	private String avatarUrl;
+	private Double balance;
 	public int getId() {
 		return id;
 	}
@@ -88,12 +82,25 @@ public class User {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+	public Double getBalance() {
+		return balance;
+	}
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", sex=" + sex + ", birthday="
 				+ birthday + ", phone=" + phone + ", nickname=" + nickname + ", address=" + address + ", tag=" + tag
-				+ ", industry=" + industry +", avatarUrl=" + avatarUrl + ", type=" + type + "]";
+				+ ", industry=" + industry + ", type=" + type + ", avatarUrl=" + avatarUrl + ", balance=" + balance + "]";
 	}
+	
 	
 	
 	

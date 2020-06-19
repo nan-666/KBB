@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import pojo.Order;
+import pojo.User;
 import pojo.ser;
 import com.mysql.jdbc.Statement;
 
@@ -66,6 +69,105 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
+		}
+	}
+	
+	public ArrayList<User> select(User user){
+		try{
+			String sql = "select * from `user`";
+			pst = (PreparedStatement) conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			ArrayList<User> rows = new ArrayList<User>();
+			if(rs.next()){
+				for(int i = 0; i < rs.getRow(); i++){
+					User temp = new User();
+					temp.setId(rs.getInt("id"));
+					temp.setName(rs.getString("name"));
+					temp.setPassword(rs.getString("password"));
+					temp.setPhone(rs.getString("phone"));
+					temp.setSex(rs.getString("sex"));
+					temp.setBirthday(rs.getDate("birthday"));
+					temp.setNickname(rs.getString("nickname"));
+					temp.setAddress(rs.getString("address"));
+					temp.setBalance(rs.getDouble("balance"));
+					temp.setAvatarUrl(rs.getString("avatarUrl"));
+					rows.add(temp);	
+			    	rs.next();
+				}	
+			}
+			return rows;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<User> searchById(int id) throws SQLException {
+		String sql = "select * from user where id=?";
+		pst = conn.prepareStatement(sql);
+		pst.setInt(1, id);
+		ResultSet rs = pst.executeQuery();
+		ArrayList<User> rows = new ArrayList<User>();
+		if (rs.next()) {
+			for(int i = 0; i < rs.getRow(); i++){
+				User temp = new User();
+				temp.setId(rs.getInt("id"));
+				temp.setName(rs.getString("name"));
+				temp.setPassword(rs.getString("password"));
+				temp.setPhone(rs.getString("phone"));
+				temp.setSex(rs.getString("sex"));
+				temp.setBirthday(rs.getDate("birthday"));
+				temp.setNickname(rs.getString("nickname"));
+				temp.setAddress(rs.getString("address"));
+				temp.setBalance(rs.getDouble("balance"));
+				temp.setAvatarUrl(rs.getString("avatarUrl"));
+				rows.add(temp);	
+		    	rs.next();
+			}	
+			return rows;
+		} else {
+			return null;
+		}
+	}
+	
+	public ArrayList<User> searchByName(String name) throws SQLException {
+		String sql = "select * from user where name=?";
+		pst = conn.prepareStatement(sql);
+		pst.setString(1, name);
+		ResultSet rs = pst.executeQuery();
+		ArrayList<User> rows = new ArrayList<User>();
+		if (rs.next()) {
+			for(int i = 0; i < rs.getRow(); i++){
+				User temp = new User();
+				temp.setId(rs.getInt("id"));
+				temp.setName(rs.getString("name"));
+				temp.setPassword(rs.getString("password"));
+				temp.setPhone(rs.getString("phone"));
+				temp.setSex(rs.getString("sex"));
+				temp.setBirthday(rs.getDate("birthday"));
+				temp.setNickname(rs.getString("nickname"));
+				temp.setAddress(rs.getString("address"));
+				temp.setBalance(rs.getDouble("balance"));
+				temp.setAvatarUrl(rs.getString("avatarUrl"));
+				rows.add(temp);	
+		    	rs.next();
+			}	
+			return rows;
+		} else {
+			return null;
+		}
+	}
+	
+	//删除用户
+	public boolean delete(int id) throws SQLException {
+		try {
+			String sql = "delete from user where id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }

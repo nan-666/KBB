@@ -6,10 +6,10 @@ public class Order {
 	
 	private int id; //id
 	private int userid;//用户id
-	private String name;//用户真实姓名
+	private String user;//用户id
 	private String phone;//用户手机号
 	private String icon;//图标url
-	private String time;//服务时间
+	private String time;//创建时间
 	private String address;//地址
 	private String title;//订单标题
 	private String describe;//订单标题
@@ -18,9 +18,7 @@ public class Order {
 	private String img_1;//订单详情图片1
 	private String img_2;//订单详情图片2
 	private String img_3;//订单详情图片3
-	private String img_4;//订单详情图片4
-	private String img_5;//订单详情图片5
-	private String state;//订单状态(0-已完成，1-正在进行中)
+	private int state;//订单状态
 	public int getId() {
 		return id;
 	}
@@ -93,22 +91,11 @@ public class Order {
 	public void setImg_3(String img_3) {
 		this.img_3 = img_3;
 	}
-	public String getImg_4() {
-		return img_4;
-	}
-	public void setImg_4(String img_4) {
-		this.img_4 = img_4;
-	}
-	public String getImg_5() {
-		return img_5;
-	}
-	public void setImg_5(String img_5) {
-		this.img_5 = img_5;
-	}
-	public String getState() {
+	
+	public int getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	public String getDescribe() {
@@ -117,20 +104,19 @@ public class Order {
 	public void setDescribe(String describe) {
 		this.describe = describe;
 	}
-	public String getName() {
-		return name;
+	public String getUser() {
+		return user;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUser(String user) {
+		this.user = user;
 	}
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", userid=" + userid + ", name=" + name + ", phone=" + phone + ", icon=" + icon
-				+ ", time=" + time + ", address=" + address + ", title=" + title + ", describe=" + describe + ", type="
-				+ type + ", money=" + money + ", img_1=" + img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", img_4="
-				+ img_4 + ", img_5=" + img_5 + ", state=" + state + "]";
+		return "order [id=" + id + ", userid=" + userid + ", user=" + user + ", phone=" + phone + ", icon=" + icon + ", time=" + time
+				+ ", address=" + address + ", title=" + title + ", type=" + type + ", money=" + money + ", img_1="
+				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", state="
+				+ state + "]";
 	}
-	
 	
 	
 	

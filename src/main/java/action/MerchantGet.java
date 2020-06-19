@@ -52,7 +52,6 @@ public class MerchantGet extends HttpServlet {
 		
 		ArrayList<Merchant> dataPojo = merchantSD.select(merchant);
 		
-		System.out.print(new Gson().toJson(dataPojo));
 		out.print(new Gson().toJson(dataPojo));
 	}
 

@@ -4,7 +4,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+import pojo.Content;
+
+import DAO.MerchantDAO;
 import DAO.OrderDAO;
+import pojo.BaseDataPojo;
+import pojo.Merchant;
 import pojo.Order;
 import util.DButil;
 
@@ -56,7 +62,7 @@ public class OrderServiceDAO {
 		}
 		
 	}
-
+	
 	public String selectState(int id){
 		Connection conn = DButil.getConnection();
 		OrderDAO orderD = new OrderDAO(conn);
@@ -78,7 +84,7 @@ public class OrderServiceDAO {
 			}
 		}
 	}
-
+	
 	public ArrayList<Order> searchByword(String word){
 		Connection conn = DButil.getConnection();
 		OrderDAO orderD = new OrderDAO(conn);
@@ -101,7 +107,7 @@ public class OrderServiceDAO {
 			      }
 		}
 	}
-
+	
 	public ArrayList<Order> selectByTypeId(String type){
 		Connection conn = DButil.getConnection();
 		OrderDAO orderD = new OrderDAO(conn);
@@ -124,6 +130,7 @@ public class OrderServiceDAO {
 			      }
 		}
 	}
+	
 	/**
 	 * 发布任务，提交订单
 	 * @param order
@@ -152,25 +159,51 @@ public class OrderServiceDAO {
 		}
 
 	}
-	public ArrayList<Order> searchByType(String type,String userid) {
+	
+	/* 删除业务 */
+	public BaseDataPojo<Order> delete(int id) {
 		Connection conn = DButil.getConnection();
-		OrderDAO merchD = new OrderDAO(conn);
-		try{
-			ArrayList<Order> rows = new ArrayList<Order>();
-			rows = merchD.searchByType(type,userid);
-			return rows;
-		}catch(Exception e){
+		OrderDAO orderD = new OrderDAO(conn);
+		try {
+			orderD.delete(id);
+			conn.commit();
+			return new BaseDataPojo<Order>("删除成功", true, null);
+		} catch (Exception e) {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			e.printStackTrace();
-			return null;
-		}finally{
-			if(conn != null){
+			return new BaseDataPojo<Order>("删除失败", false, null);
+		} finally {
+			if (conn != null) {
 				DButil.closeConnection(conn);
 			}
 		}
+	}
+	
+	//获取总数
+	public ArrayList<Content> content() {
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		ArrayList<Content> rows = null;
+		try{
+			rows = orderD.content();
+			return rows;
+		}
+		catch(Exception e){
+		      try {
+		        conn.rollback();
+		      } catch (SQLException e1) {
+		        e1.printStackTrace();
+		      }
+		      e.printStackTrace();
+		      return null;
+		    }finally{
+		      
+		      if(conn != null){
+		      DButil.closeConnection(conn);
+		      }
+		    }
 	}
 }

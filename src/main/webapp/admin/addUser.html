@@ -1,0 +1,491 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>快帮邦后台管理系统</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+
+
+<meta name="author" content="yinqi">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/materialdesignicons.min.css" rel="stylesheet">
+<!--标签插件-->
+<link rel="stylesheet"
+	href="js/jquery-tags-input/jquery.tagsinput.min.css">
+<!-- 大图预览 -->
+<link rel="stylesheet" href="css/zoomify.min.css">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body data-logobg="color_8" data-sidebarbg="color_8">
+	<div class="lyear-layout-web">
+		<div class="lyear-layout-container" id="vue-model">
+			<!--左侧导航-->
+			<aside class="lyear-layout-sidebar">
+
+				<!-- logo -->
+				<div id="logo" class="sidebar-header">
+					<a href="index.html"><img src="images/logo-sidebar.png"
+						title="LightYear" alt="LightYear" /></a>
+				</div>
+				<div class="lyear-layout-sidebar-scroll">
+
+					<nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+			<li class="nav-item"><a href="index.html"><i
+			class="mdi mdi-home"></i> 后台首页</a></li>
+			
+			<li class="nav-item nav-item-has-subnav">
+				<a href="javascript:void(0)"><i class="mdi mdi-account"></i> 用户管理</a>
+				<ul class="nav nav-subnav">
+					<li class="active"><a href="userManager.html">普通用户</a></li>
+					<li><a href="shopManager.html">服务商</a></li>
+				</ul>
+			</li>
+			<li class="nav-item"><a href="order.html"><i class="mdi mdi-paper-cut-vertical"></i> 任务订单管理</a></li>
+			<li class="nav-item nav-item-has-subnav">
+				<a href="javascript:void(0)"><i class="mdi mdi-settings"></i> 系统管理</a>
+				<ul class="nav nav-subnav">
+					<li class="active"><a href="403.html">403页面</a></li>
+					<li><a href="404.html">404页面</a></li>
+					<li><a href="500.html">500页面</a></li>
+				</ul>
+			</li>
+							
+		 </ul>
+        </nav>
+					
+				</div>
+
+			</aside>
+			<!--End 左侧导航-->
+
+			<!--头部信息-->
+			<header class="lyear-layout-header">
+
+				<nav class="navbar navbar-default">
+					<div class="topbar">
+
+						<div class="topbar-left">
+							<div class="lyear-aside-toggler">
+								<span class="lyear-toggler-bar"></span> <span
+									class="lyear-toggler-bar"></span> <span
+									class="lyear-toggler-bar"></span>
+							</div>
+							<span class="navbar-page-title"> 示例页面 - 文档列表 </span>
+						</div>
+
+						<ul class="topbar-right">
+							<li class="dropdown dropdown-profile"><a
+								href="javascript:void(0)" data-toggle="dropdown"> <img
+									class="img-avatar img-avatar-48 m-r-10"
+									src="images/users/avatar.jpg" alt="管理员" /> <span>管理员 <span
+										class="caret"></span></span>
+							</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="personalInfo.html"><i
+											class="mdi mdi-account"></i> 个人信息</a></li>
+									<li><a href="edit_pwd.html"><i
+											class="mdi mdi-lock-outline"></i> 修改密码</a></li>
+									<li><a href="javascript:void(0)"><i
+											class="mdi mdi-delete"></i> 清空缓存</a></li>
+									<li class="divider"></li>
+									<li><a href="pages_login.html"><i
+											class="mdi mdi-logout-variant"></i> 退出登录</a></li>
+								</ul></li>
+							<!--切换主题配色-->
+							<li class="dropdown dropdown-skin"><span
+								data-toggle="dropdown" class="icon-palette"><i
+									class="mdi mdi-palette"></i></span>
+								<ul class="dropdown-menu dropdown-menu-right"
+									data-stopPropagation="true">
+									<li class="drop-title"><p>主题</p></li>
+									<li class="drop-skin-li clearfix"><span class="inverse">
+											<input type="radio" name="site_theme" value="default"
+											id="site_theme_1" checked> <label for="site_theme_1"></label>
+									</span> <span> <input type="radio" name="site_theme"
+											value="dark" id="site_theme_2"> <label
+											for="site_theme_2"></label>
+									</span> <span> <input type="radio" name="site_theme"
+											value="translucent" id="site_theme_3"> <label
+											for="site_theme_3"></label>
+									</span></li>
+									<li class="drop-title"><p>LOGO</p></li>
+									<li class="drop-skin-li clearfix"><span class="inverse">
+											<input type="radio" name="logo_bg" value="default"
+											id="logo_bg_1" checked> <label for="logo_bg_1"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_2" id="logo_bg_2"> <label
+											for="logo_bg_2"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_3" id="logo_bg_3"> <label
+											for="logo_bg_3"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_4" id="logo_bg_4"> <label
+											for="logo_bg_4"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_5" id="logo_bg_5"> <label
+											for="logo_bg_5"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_6" id="logo_bg_6"> <label
+											for="logo_bg_6"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_7" id="logo_bg_7"> <label
+											for="logo_bg_7"></label>
+									</span> <span> <input type="radio" name="logo_bg"
+											value="color_8" id="logo_bg_8"> <label
+											for="logo_bg_8"></label>
+									</span></li>
+									<li class="drop-title"><p>头部</p></li>
+									<li class="drop-skin-li clearfix"><span class="inverse">
+											<input type="radio" name="header_bg" value="default"
+											id="header_bg_1" checked> <label for="header_bg_1"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_2" id="header_bg_2"> <label
+											for="header_bg_2"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_3" id="header_bg_3"> <label
+											for="header_bg_3"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_4" id="header_bg_4"> <label
+											for="header_bg_4"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_5" id="header_bg_5"> <label
+											for="header_bg_5"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_6" id="header_bg_6"> <label
+											for="header_bg_6"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_7" id="header_bg_7"> <label
+											for="header_bg_7"></label>
+									</span> <span> <input type="radio" name="header_bg"
+											value="color_8" id="header_bg_8"> <label
+											for="header_bg_8"></label>
+									</span></li>
+									<li class="drop-title"><p>侧边栏</p></li>
+									<li class="drop-skin-li clearfix"><span class="inverse">
+											<input type="radio" name="sidebar_bg" value="default"
+											id="sidebar_bg_1" checked> <label for="sidebar_bg_1"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_2" id="sidebar_bg_2"> <label
+											for="sidebar_bg_2"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_3" id="sidebar_bg_3"> <label
+											for="sidebar_bg_3"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_4" id="sidebar_bg_4"> <label
+											for="sidebar_bg_4"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_5" id="sidebar_bg_5"> <label
+											for="sidebar_bg_5"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_6" id="sidebar_bg_6"> <label
+											for="sidebar_bg_6"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_7" id="sidebar_bg_7"> <label
+											for="sidebar_bg_7"></label>
+									</span> <span> <input type="radio" name="sidebar_bg"
+											value="color_8" id="sidebar_bg_8"> <label
+											for="sidebar_bg_8"></label>
+									</span></li>
+								</ul></li>
+							<!--切换主题配色-->
+						</ul>
+
+					</div>
+				</nav>
+
+			</header>
+			<!--End 头部信息-->
+
+			<!--页面主要内容-->
+			<main class="lyear-layout-content">
+
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<form @submit.prevent="submit" class="row">
+									<div class="form-group">
+                    					<label for="username">用户名</label>
+                    					<input type="text" class="form-control" name="username" id="username" value="lightyear"  />
+                  					</div>
+									<div class="form-group">
+                    					<label for="nickname">昵称</label>
+                    					<input type="text" class="form-control" name="nickname" id="nickname" placeholder="输入昵称" value="管理员">
+                  					</div>
+									<div class="form-group">
+                    					<label for="nickname">联系电话</label>
+                    					<input type="text" class="form-control" name="phone" id="phone" placeholder="输入联系电话" value="管理员">
+                  					</div>
+                  					<div class="form-group">
+                    					<label for="nickname">住址</label>
+                    					<input type="text" class="form-control" name="address" id="address" placeholder="输入地址" value="管理员">
+                  					</div>
+									<div class="form-group col-md-12">
+										<label>头像</label>
+										<div class="form-controls">
+											<ul class="list-inline clearfix lyear-uploads-pic"
+												style="min-height: 90px;">
+												<li v-if="imgSrc" class="col-xs-4 col-sm-3 col-md-2">
+													<figure class="zoomify">
+														<img v-bind:src="imgSrc">
+														<figcaption v-if="!isZoom">
+															<a class="btn btn-round btn-square btn-primary"
+																@click="viewImg"><i class="mdi mdi-eye"></i></a> <a
+																class="btn btn-round btn-square btn-danger"
+																@click="delImg"><i class="mdi mdi-delete"></i></a>
+														</figcaption>
+													</figure>
+												</li>
+												<li class="col-xs-4 col-sm-3 col-md-2"><a
+													class="pic-add" id="add-pic-btn" title="点击上传"
+													@click="addImg"> <input type="file"
+														style="display: none;" id="fileInput"
+														@change="inputChange" />
+												</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="status">状态</label>
+										<div class="clearfix">
+											<label class="lyear-radio radio-inline radio-primary">
+												<input type="radio" name="status" value="0"
+												v-model="swiperDetail.state"><span>禁用</span>
+											</label> <label class="lyear-radio radio-inline radio-primary">
+												<input type="radio" name="status" value="1" checked
+												v-model="swiperDetail.state"><span>启用</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-md-12">
+										<button type="submit" class="btn btn-primary ajax-post">确
+											定</button>
+										<button type="button" class="btn btn-default"
+											onclick="javascript:history.back(-1);return false;">返回</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			</main>
+			<!--End 页面主要内容-->
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+	<!--标签插件-->
+	<script src="js/jquery-tags-input/jquery.tagsinput.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<!-- 网络请求 -->
+	<script type="text/javascript" src="js/axios.js"></script>
+	<!-- 参数处理JS，与axios配合使用 -->
+	<script type="text/javascript" src="js/qs.js"></script>
+	<!-- 页面加载显示 -->
+	<script type="text/javascript" src="js/lightyear.js"></script>
+	<!-- 消息提示JS -->
+	<script src="js/bootstrap-notify.min.js"></script>
+	<!-- 图片预览JS -->
+	<script type="text/javascript" src="js/zoomify.min.js"></script>
+	<!-- 七牛云JS -->
+	<script type="text/javascript" src="js/qiniu.min.js"></script>
+
+	<!-- 网络版js（备用） -->
+	<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script> -->
+	
+	<script type="text/javascript">
+	// 页面内容加载完成前调用
+	window.onload = function(){
+		var type = GetRequest()['type'];
+		if(type == 'edit'){
+			var id = GetRequest()['id'];
+			myVue.title = '编辑详情';
+			myVue.swiperDetail.id = id;
+			getDetail(id);
+		}else{
+			myVue.title = '新增详情';
+		}
+		myVue.type = type;
+	}
+	
+	var myVue = new Vue({
+		el : '#vue-model',		// 作用域，绑定页面中标签的id，则此标签为myVue的作用域
+		data : {				// 在作用域中可绑定的数据
+			title: '',
+			swiperDetail: {
+				title:'',
+				link: '',
+				rank: 1,
+				imgUrl: '',
+				state: 1,
+				position: 1
+			},
+			file: null,
+			isZoom: false,	// 图片是否被放大
+			imgSrc: ''		// 图片显示url，原始url拼接参数
+		},
+		methods : {				// 在作用域中可绑定的方法
+			addImg(){		// 点击添加图片
+				$('#fileInput').click();	// 触发隐藏的file文本框
+			},
+			
+			inputChange(){	 // 监听file文本框
+				var fileInput = document.getElementById('fileInput');
+				console.log(fileInput.files)
+				if (fileInput.files[0]) {	// input中添加了图片
+				    var imgUrl = window.URL.createObjectURL(fileInput.files[0]); // 将文件生成url
+				    this.imgSrc = imgUrl;
+				    this.file = fileInput.files[0];		// 保存临时文件，此文件将上传到七牛云
+				}
+			},
+			
+			viewImg(){		// 查看大图
+				$('.zoomify').zoomify('zoomIn');
+				// 监听放大图片、缩小图片事件
+				$('.zoomify').zoomify().on({
+					'zoom-in-complete.zoomify': function() {
+						myVue.isZoom = true;
+					},
+					'zoom-out-complete.zoomify': function() {
+						myVue.isZoom = false;
+					}
+				})
+			},
+			
+			delImg(){		// 删除预览图片
+				$('.zoomify').zoomify('zoomOut');	// 防止先缩放图片后，再删除图片时出现灰色遮罩层
+				this.imgSrc = '';		// 删除预览图资源
+				var fileInput = document.getElementById('fileInput');
+				fileInput.value = '';	// 删除隐藏文件框资源
+			},
+			
+			submit(){		// 提交保存：新增/编辑
+				if(!this.imgSrc){
+					lightyear.notify('至少上传一张图片~', 'warning', 1500, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+					return;
+				}
+				lightyear.loading('show');
+				var file = this.file;
+				var key = '';
+				if(myVue.type == 'add'){	// 新增轮播图时，用新生成的key获取token，并上传
+					key = 'appIndex' + new Date().valueOf() + '.png';
+				}else{		// 编辑轮播图时，用原图片的key
+					var imgUrl = myVue.swiperDetail.imgUrl;
+					key = imgUrl.slice(imgUrl.lastIndexOf('/')+1);
+				}
+				if(file){		// 如已添加图片，先上传图片
+					// 1.从服务端获取token
+					axios({
+						method: 'post',
+						url: '/17JkCourseWeb/getToken',
+						headers:{'content-type': 'application/x-www-form-urlencoded'},
+						data: Qs.stringify({key: key})	
+					}).then((response)=>{
+						// 2.上传图片到七牛
+						var token = response.data.data.token;
+						uploadQiniu(file, key , token)
+					}).catch((error)=>{
+						console.log(error);
+					})
+				}else{			// 如编辑详情时没有修改图片，则只更新其他数据
+					updateSwiper();
+				}
+			}
+		}
+	});
+	
+	function getDetail(id){
+		axios({
+			method: 'post',
+			url: '/CourseWeb/getAppIndexDetail',
+			headers:{'content-type': 'application/x-www-form-urlencoded'},
+			data: Qs.stringify({id:id})	
+		}).then((response)=>{
+			lightyear.loading('hide');
+			myVue.swiperDetail = response.data.data;
+			myVue.imgSrc = response.data.data.imgUrl + '?a=' + new Date().valueOf();
+		}).catch((error)=>{
+			lightyear.loading('hide');
+			console.log(error);
+		})
+	}
+	
+	function uploadQiniu(file, key, token){
+		var config = {
+			// 上传域名区域，z0指华东地区
+			region: qiniu.region.z0
+		};
+		var putExtra = {
+			// 限制上传文件类型
+			mimeType: ["image/png", "image/jpeg", "image/gif"]
+		};
+		var observe = {
+			next (res) {	// 上传中
+			    console.log('当前上传进度，范围：0～100：' + res.total.percent);
+			},error (err) {	// 上传错误
+			    console.log(err.message)
+			},complete (res) {	// 上传完成，上传成功后返回key和 hash
+				myVue.swiperDetail.imgUrl = 'http://qanwi3r8w.bkt.clouddn.com/' + res.key;		// 设置图片地址为七牛空间的真实url
+				myVue.imgSrc = 'http://qanwi3r8w.bkt.clouddn.com/' + res.key + '?a=' + new Date().valueOf();	// 拼接参数，去除缓存
+				updateSwiper();
+			}
+		};
+		var observable = qiniu.upload(file, key, token, putExtra, config);
+		var subscription = observable.subscribe(observe);
+	}
+	
+	function updateSwiper(){
+		var url = '';
+		if(myVue.type == 'add'){
+			url = '/17JkCourseWeb/addAppIndex?type=top'
+		}else{
+			url = '/CourseWeb/updateAppIndex'
+		}
+		axios({
+			method: 'post',
+			url: url,
+			headers:{'content-type': 'application/x-www-form-urlencoded'},
+			data: Qs.stringify(myVue.swiperDetail)	
+		}).then((response)=>{
+			lightyear.loading('hide');
+			lightyear.notify('添加成功，页面即将自动跳转~', 'success', 2000, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+			// 通知上一个页面刷新
+			sessionStorage.setItem('refresh', 'true');
+			// 返回上一个页面
+			history.go(-1);
+		}).catch((error)=>{
+			lightyear.loading('hide');
+			console.log(error);
+		})
+	}
+	
+	// 读取在window.location.href中的参数
+	function GetRequest() {
+		var url = location.search; //获取url中"?"符后的字串   
+		var theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+			var str = url.substr(1);
+			strs = str.split("&");
+			for (var i = 0; i < strs.length; i++) {
+				theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			}
+		}
+		return theRequest;
+	}
+	</script>
+</body>
+</html>

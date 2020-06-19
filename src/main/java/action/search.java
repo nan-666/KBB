@@ -53,6 +53,7 @@ public class search extends HttpServlet {
 		
 		//1.(参)获取参数值，并保存到POJO对象
 		String type = request.getParameter("type");
+		System.out.print(type);
 		ArrayList<Merchant> dataPojo = merchSD.searchByType(type);
 				
 		// 将封装数据返回到小程序端
