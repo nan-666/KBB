@@ -230,4 +230,25 @@ public class OrderServiceDAO {
 		      }
 		    }
 	}
+	public ArrayList<Order> searchByType(String type,String userid) {
+		Connection conn = DButil.getConnection();
+		OrderDAO merchD = new OrderDAO(conn);
+		try{
+			ArrayList<Order> rows = new ArrayList<Order>();
+			rows = merchD.searchByType(type,userid);
+			return rows;
+		}catch(Exception e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return null;
+		}finally{
+			if(conn != null){
+				DButil.closeConnection(conn);
+			}
+		}
+	}
 }

@@ -9,8 +9,5 @@
         <module name="kbb" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="kbb" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

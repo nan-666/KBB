@@ -19,7 +19,55 @@ public class OrderDAO {
 		super();
 		this.conn = conn;
 	}
-	
+	//查询全部订单
+	public ArrayList<Order> searchByType(String item,String userid){
+		String sql;
+		try{
+			if(item.equals("0")){
+				sql = "select * from `order` where userid like '%"
+						+userid
+						+"%'"
+				;
+			}else{
+				sql = "select * from `order` where userid like '%"
+						+userid
+						+"%'"
+						+"and state like '%"
+						+item
+						+"%'"
+				;
+			}
+			System.out.print(sql);
+			pst = (PreparedStatement) conn.prepareStatement(sql);
+			//pst.setString(1, type);
+
+			ResultSet rs = pst.executeQuery();
+			ArrayList<Order> rows = new ArrayList<Order>();
+			if(rs.next()){
+				for(int i = 0 ; i<rs.getRow();i++){
+					Order temp = new Order();
+					temp.setId(rs.getInt("id"));
+					temp.setUserid(rs.getInt("userid"));
+					temp.setPhone(rs.getString("phone"));
+					temp.setIcon(rs.getString("icon"));
+					temp.setTime(rs.getTime("time")+"");
+					temp.setAddress(rs.getString("address"));
+					temp.setTitle(rs.getString("title"));
+					temp.setType(rs.getString("type"));
+					temp.setMoney(rs.getInt("money"));
+					temp.setImg_1(rs.getString("img_1"));
+					temp.setState(rs.getString("state"));
+					rows.add(temp);
+					rs.next();
+				}
+			}
+			return rows;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 	//查询任务
 	public ArrayList<Order> select(Order order){
 		try{
@@ -42,7 +90,6 @@ public class OrderDAO {
 					+ " and `order`.ordertypeid = `ordertype`.id";
 			pst = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
-			
 			ArrayList<Order> rows = new ArrayList<Order>();
 			if(rs.next()){
 				for(int i = 0; i < rs.getRow(); i++){
@@ -114,9 +161,9 @@ public class OrderDAO {
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
 					temp.setState(rs.getString("state"));
-					rows.add(temp);	
+					rows.add(temp);
 			    	rs.next();
-				}	
+				}
 			}
 			return rows;
 		}catch(Exception e){
@@ -192,9 +239,9 @@ public class OrderDAO {
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
 					temp.setState(rs.getString("state"));
-			    	rows.add(temp);	
-			    	rs.next();
-		    	}
+					rows.add(temp);
+					rs.next();
+				}
 			}
 			return rows;
 		}catch(Exception e){
@@ -248,9 +295,9 @@ public class OrderDAO {
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
 					temp.setState(rs.getString("state"));
-					rows.add(temp);	
-			    	rs.next();
-				}	
+					rows.add(temp);
+					rs.next();
+				}
 			}
 			return rows;
 		}catch(Exception e){
@@ -261,32 +308,31 @@ public class OrderDAO {
 	
 	public int insetOrder(Order order) {
         try{
-            String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`money`,`img_1`,`img_2`,`img_3`,`ordertypeid`,`state`) value ('";
+            String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`money`,`img_1`,`img_2`,`img_3`,`state`,`ordertypeid`) value ('";
             sql = sql+order.getUserid()+"','";
             sql = sql+order.getPhone()+"','";
             sql = sql+order.getTime()+"','";
             sql = sql+order.getAddress()+"','";
             sql = sql+order.getDescribe()+"','";
+            sql = sql+order.getType()+"','";
             sql = sql+order.getMoney()+"','";
-            
-            
-            if(order.getImg_1()== null){
+            if("".equals(order.getImg_1())){
                 sql = sql+"/"+"','";
             }else{
                 sql = sql+order.getImg_1()+"','";
             }
-            if(order.getImg_2() == null){
+            if("".equals(order.getImg_2())){
                 sql = sql+"/"+"','";
             }else{
                 sql = sql+order.getImg_2()+"','";
             }
-            if(order.getImg_3() == null){
+            if("".equals(order.getImg_3())){
                 sql = sql+"/"+"','";
             }else{
                 sql = sql+order.getImg_3()+"','";
             }
-            sql = sql+order.getOrdertypeid()+"','";
             sql = sql+order.getState()+"')";
+            System.out.println(sql);
             pst = (PreparedStatement) conn.prepareStatement(sql);
             int rs = pst.executeUpdate();
             return rs;
@@ -295,31 +341,6 @@ public class OrderDAO {
             return 0;
         }
     }
-	
-	//服务商接单
-	public int updateOrder(int merchantid,int id){
-		try{
-			String Sql = "select id from `merchant` where id="+merchantid;
-			pst = (PreparedStatement) conn.prepareStatement(Sql);
-			ResultSet r = pst.executeQuery();
-			if(r.next()){
-				String sql = "update `order` set merchantid = "
-					     +merchantid
-					     +",state = 2"
-					     +" where id = "
-					     +id;
-				pst = (PreparedStatement) conn.prepareStatement(sql);
-				int rs = pst.executeUpdate();
-				return rs;
-			}else{
-				return 0;
-			}
-			
-		}catch(Exception e){
-            e.printStackTrace();
-            return 0;
-        }
-	}
 	
 	//删除任务
 	public boolean delete(int id) throws SQLException {

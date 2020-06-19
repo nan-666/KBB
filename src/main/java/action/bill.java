@@ -12,22 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import pojo.Order;
-import service.OrderServiceDAO;
+import pojo.Bill;
+import service.BillServiceDAO;
 
-/**
- * Servlet implementation class order
- */
-@WebServlet("/order")
-public class order extends HttpServlet {
+@WebServlet("/main/java/action/bill")
+
+public class bill extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Order order = new Order();
-	OrderServiceDAO orderSD = new OrderServiceDAO();
+	Bill  merch = new  Bill();
+	BillServiceDAO merchSD = new BillServiceDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public order() {
+    public bill() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,9 +48,15 @@ public class order extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();		// 将响应数据写入服务器，并返回到客户端
 		
-		ArrayList<Order> dataPojo = orderSD.select(order);
+		//1.(参)获取参数值，并保存到POJO对象
+		//此item系userId
+		String item = request.getParameter("userid");
 		
+		ArrayList<Bill> dataPojo = merchSD.searchByType(item);
+		// 将封装数据返回到小程序端
+		System.out.println(new Gson().toJson(dataPojo));
 		out.print(new Gson().toJson(dataPojo));
+		
 	}
 
 }
