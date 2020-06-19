@@ -40,10 +40,12 @@ public class Login extends HttpServlet {
 		PrintWriter out = resp.getWriter();		// 将响应数据写入服务器，并返回到客户端 
 		
 		// 小程序的appId、appSecret
-		String appId = "wx733e18ef2614b57d";
-		String appSecret = "8db4de096b5cadd6a10f335e0ccf37be";	
+		String appId = "wxf9209f89660b3a5c";
+		String appSecret = "63bd4a7ae494f6a8831fbf4818bc70a7";	
 		// 获取前端发送的code
 		String code = req.getParameter("code");
+		System.out.println(code);
+		System.out.println(code);
 		
 		// 调用微信接口请求用的openId、session_key等信息
 		String url = "https://api.weixin.qq.com/sns/jscode2session" + "?appid=" + appId + "&secret=" + appSecret + "&js_code=" + code +
@@ -54,12 +56,14 @@ public class Login extends HttpServlet {
 		String str = httpUtil.doGet(url, map);	// 返回jsonstring形式的结果
 		// 解析json字符串，获取openId
 		map = new Gson().fromJson(str, Map.class);
+		System.out.println(map.toString());
 		// 生成token，这里使用时间戳生成token，实际开发中建议使用更加成熟的机制生成token
 		String token = "token_" + new Date().getTime();
 		System.out.println("openId=" + map.get("openid") + ", token=" + token);
 		LoginService loginService = new LoginService();
 		BaseDataPojo<LoginSession> dataPojo = loginService.login(map.get("openid"), token);
 		// 将封装数据返回到小程序端
+		System.out.println(new Gson().toJson(dataPojo).toString());
 		out.print(new Gson().toJson(dataPojo));
 	}
 }

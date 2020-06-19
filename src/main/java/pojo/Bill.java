@@ -12,6 +12,7 @@ public class Bill {
 	private String state;//当前状态
 	private String odd;//订单号
 	private String information;//交易信息
+	private int balance;
 	public int getId() {
 		return id;
 	}
@@ -60,13 +61,21 @@ public class Bill {
 	public void setInformation(String information) {
 		this.information = information;
 	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 	
 	@Override
 	public String toString() {
 		return "Bill [id=" + id + ", userid=" + userid + ", numberbefore=" + numberbefore + ", numberafter="
 				+ numberafter + ", time=" + time + ", state=" + state + ", odd=" + odd + ", information=" + information
-				+ "]";
+				+ ", balance=" + balance +"]";
 	}
+	
+	
 	
 	
 	
