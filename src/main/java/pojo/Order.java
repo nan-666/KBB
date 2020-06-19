@@ -6,6 +6,7 @@ public class Order {
 	
 	private int id; //id
 	private int userid;//用户id
+	private String user;//用户id
 	private String phone;//用户手机号
 	private String icon;//图标url
 	private String time;//创建时间
@@ -17,7 +18,7 @@ public class Order {
 	private String img_1;//订单详情图片1
 	private String img_2;//订单详情图片2
 	private String img_3;//订单详情图片3
-	private int state;//订单状态
+	private String state;//订单状态
 	public int getId() {
 		return id;
 	}
@@ -91,10 +92,10 @@ public class Order {
 		this.img_3 = img_3;
 	}
 	
-	public int getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	public String getDescribe() {
@@ -103,13 +104,20 @@ public class Order {
 	public void setDescribe(String describe) {
 		this.describe = describe;
 	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
-		return "order [id=" + id + ", userid=" + userid + ", phone=" + phone + ", icon=" + icon + ", time=" + time
+		return "order [id=" + id + ", userid=" + userid + ", user=" + user + ", phone=" + phone + ", icon=" + icon + ", time=" + time
 				+ ", address=" + address + ", title=" + title + ", type=" + type + ", money=" + money + ", img_1="
 				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", state="
 				+ state + "]";
 	}
+	
 	
 	
 	

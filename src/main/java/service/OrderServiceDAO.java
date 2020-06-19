@@ -5,7 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
+import pojo.Content;
+
+import DAO.MerchantDAO;
 import DAO.OrderDAO;
+import pojo.BaseDataPojo;
+import pojo.Merchant;
 import pojo.Order;
 import util.DButil;
 
@@ -124,5 +129,81 @@ public class OrderServiceDAO {
 			        DButil.closeConnection(conn);
 			      }
 		}
+	}
+	
+	/**
+	 * 发布任务，提交订单
+	 * @param order
+	 * @return
+	 */
+	public int insetOrder(Order order){
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		try{
+
+			int res = orderD.insetOrder(order);
+			conn.commit();
+			return res;
+		}catch(Exception e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return 0;
+		}finally{
+			if(conn != null){
+				DButil.closeConnection(conn);
+			}
+		}
+
+	}
+	
+	/* 删除业务 */
+	public BaseDataPojo<Order> delete(int id) {
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		try {
+			orderD.delete(id);
+			conn.commit();
+			return new BaseDataPojo<Order>("删除成功", true, null);
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return new BaseDataPojo<Order>("删除失败", false, null);
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+	
+	//获取总数
+	public ArrayList<Content> content() {
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		ArrayList<Content> rows = null;
+		try{
+			rows = orderD.content();
+			return rows;
+		}
+		catch(Exception e){
+		      try {
+		        conn.rollback();
+		      } catch (SQLException e1) {
+		        e1.printStackTrace();
+		      }
+		      e.printStackTrace();
+		      return null;
+		    }finally{
+		      
+		      if(conn != null){
+		      DButil.closeConnection(conn);
+		      }
+		    }
 	}
 }

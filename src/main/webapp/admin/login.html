@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="Expires" content="0"> 
+<title>后台登录</title> 
+<link href="css/login.css" type="text/css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/materialdesignicons.min.css" rel="stylesheet">
+</head> 
+<body> 
+
+<div class="login">
+    <div class="message">快帮邦-管理登录</div>
+    <div id="darkbannerwrap"></div>
+    
+    <form action="#!" method="post" id="vue-model">
+		<div class="form-group has-feedback feedback-left">
+			<input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" v-model="username" />
+			
+		</div>
+		<div class="form-group has-feedback feedback-left">
+			<input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" v-model="password" />
+			
+		</div>
+		<div class="form-group">
+		<button id="loginbutton" class="btn btn-block btn-primary" type="button" data-loading-text="登录中..." autocomplete="off"
+		@click="login">立即登录</button>
+	</div>
+</form>
+
+	
+</div>
+
+<div class="copyright">© 2020快帮邦 服务平台</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<!-- 引入vue的JS文件 -->
+	<script type="text/javascript" src="js/vue.js"></script>
+	<!-- 网络请求 -->
+	<script type="text/javascript" src="js/axios.js"></script>
+	<!-- 参数处理JS，与axios配合使用 -->
+	<script type="text/javascript" src="js/qs.js"></script>
+	<!-- 进度加载显示 -->
+	<script type="text/javascript" src="js/lightyear.js"></script>
+	<!-- 消息提示JS -->
+	<script src="js/bootstrap-notify.min.js"></script>
+	<!-- md5加密 -->
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript">
+	//Vue封装
+	var myVue = new Vue({
+		el: '#vue-model',		// 设置vue的作用域，绑定页面中某个标签的id，则此标签为myVue的作用域
+		data: {					// data中定义在作用域中可绑定的数据
+			username: '',
+			password: ''
+		},
+		methods:{
+			login(){
+				if(characterValidate()){		// 输入验证
+					$('#loginbutton').button('loading');	// 登录按钮处于loading状态
+					// 发起网络请求
+					axios({
+						method: 'post',
+						url: '/kbb/adminLogin',
+						headers:{'content-type': 'application/x-www-form-urlencoded'},
+						data: Qs.stringify({
+							username: this.username,
+							password: this.password
+						})	
+					}).then((response) => {		// 请求成功，结果由response带回
+						$('#loginbutton').button('reset');
+						console.log(response)
+						if(response.data.success){
+							window.location.href = "/kbb/admin/index.html";
+						}else{
+							lightyear.notify(response.data.msg, 'warning', 2000, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+						}
+					}).catch((error) => {		// 请求错误时，执行catch，错误信息由error带回
+						$('#loginbutton').button('reset');
+					})	
+				}
+			}
+		}
+	})
+	
+	// 字符有效性验证
+	function characterValidate(){
+	  // 用户输入的合法性验证:只能是汉字、字母、数字、下划线
+	  var reg = /^[\u4E00-\u9FA5\w\d-]+$/;
+	  // 判断账户
+	  var username = myVue.username;
+	  var isRight = reg.test(username);
+	  if(username == ""){
+		lightyear.notify('账号不能为空', 'warning', 2000, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+	    $("#username").focus();
+	    return false;
+	  }
+	  if (!isRight){
+		lightyear.notify('账号包含非法字符', 'warning', 2000, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+	    $("#username").val("");
+	    $("#username").focus();
+	    return false;
+	  }
+	  // 判断密码
+	  var password = myVue.password;
+	  var isRight = reg.test(password);
+	  if(password == ""){
+		lightyear.notify('密码不能为空', 'warning', 2000, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+	    $("#password").focus();
+	    return false;
+	  }
+	  if (!isRight){
+		lightyear.notify('密码包含非法字符', 'warning', 2000, 'mdi mdi-emoticon-happy', 'bottom', 'center');
+	    $("#password").val("");
+	    $("#password").focus();
+	    return false;
+	  }
+	  return true;
+	}
+</script>
+
+</body>
+</html>

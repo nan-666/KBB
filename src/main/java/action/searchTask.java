@@ -54,7 +54,6 @@ public class searchTask extends HttpServlet {
 		String word = request.getParameter("word");
 		ArrayList<Order> dataPojo = orderSD.searchByword(word);
 		// 将封装数据返回到小程序端
-		System.out.print(new Gson().toJson(dataPojo));
 		out.print(new Gson().toJson(dataPojo));
 	}
 

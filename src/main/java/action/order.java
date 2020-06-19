@@ -52,7 +52,6 @@ public class order extends HttpServlet {
 		
 		ArrayList<Order> dataPojo = orderSD.select(order);
 		
-		System.out.print(new Gson().toJson(dataPojo));
 		out.print(new Gson().toJson(dataPojo));
 	}
 

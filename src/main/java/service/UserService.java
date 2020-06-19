@@ -2,11 +2,14 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import DAO.UserDAO;
 import pojo.BaseDataPojo;
+import pojo.Order;
+import pojo.User;
 import pojo.ser;
 import com.google.gson.Gson;
 import util.DButil;
@@ -45,4 +48,82 @@ public class UserService {
 		}
 		return user;
 	}
+	
+	public ArrayList<User> select(User user){
+		Connection conn = DButil.getConnection();
+		UserDAO userD = new UserDAO(conn);
+		try{
+			ArrayList<User> rows = new ArrayList<User>();
+			rows = userD.select(user);
+			conn.commit();
+			return rows;
+		}catch(Exception e){
+		      try {
+			        conn.rollback();
+			      } catch (SQLException e1) {
+			        e1.printStackTrace();
+			      }
+			      e.printStackTrace();
+			      return null;
+			    }finally{
+			      if(conn != null){
+			        DButil.closeConnection(conn);
+			      }
+		}
+	}
+	
+	public ArrayList<User> searchById(int id) {
+		Connection conn = DButil.getConnection();
+		UserDAO userDAO = new UserDAO(conn);
+		ArrayList<User> rows = new ArrayList<User>();
+		try {
+			rows = userDAO.searchById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+		return rows;
+	}
+	
+	public ArrayList<User> searchByName(String name) {
+		Connection conn = DButil.getConnection();
+		UserDAO userDAO = new UserDAO(conn);
+		ArrayList<User> rows = new ArrayList<User>();
+		try {
+			rows = userDAO.searchByName(name);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+		return rows;
+	}
+	
+	/* 删除业务 */
+	public BaseDataPojo<User> delete(int id) {
+		Connection conn = DButil.getConnection();
+		UserDAO userD = new UserDAO(conn);
+		try {
+			userD.delete(id);
+			conn.commit();
+			return new BaseDataPojo<User>("删除成功", true, null);
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return new BaseDataPojo<User>("删除失败", false, null);
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+
 }
