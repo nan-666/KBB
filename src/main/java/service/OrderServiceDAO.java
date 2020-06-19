@@ -160,6 +160,30 @@ public class OrderServiceDAO {
 
 	}
 	
+	//服务商接单
+	public int updateOrder(int merchantid,int id){
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		try{
+
+			int res = orderD.updateOrder(merchantid,id);
+			conn.commit();
+			return res;
+		}catch(Exception e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return 0;
+		}finally{
+			if(conn != null){
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+	
 	/* 删除业务 */
 	public BaseDataPojo<Order> delete(int id) {
 		Connection conn = DButil.getConnection();

@@ -6,6 +6,7 @@ public class Order {
 	
 	private int id; //id
 	private int userid;//用户id
+	private int merchantid;//用户id
 	private String user;//用户id
 	private String phone;//用户手机号
 	private String icon;//图标url
@@ -19,6 +20,7 @@ public class Order {
 	private String img_2;//订单详情图片2
 	private String img_3;//订单详情图片3
 	private String state;//订单状态
+	private int ordertypeid;//类型id
 	public int getId() {
 		return id;
 	}
@@ -30,6 +32,12 @@ public class Order {
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	public int getMerchantid() {
+		return merchantid;
+	}
+	public void setMerchantid(int merchantid) {
+		this.merchantid = merchantid;
 	}
 	public String getPhone() {
 		return phone;
@@ -110,13 +118,21 @@ public class Order {
 	public void setUser(String user) {
 		this.user = user;
 	}
+	public int getOrdertypeid() {
+		return ordertypeid;
+	}
+	public void setOrdertypeid(int ordertypeid) {
+		this.ordertypeid = ordertypeid;
+	}
 	@Override
 	public String toString() {
-		return "order [id=" + id + ", userid=" + userid + ", user=" + user + ", phone=" + phone + ", icon=" + icon + ", time=" + time
+		return "order [id=" + id + ", userid=" + userid + ", merchantid=" + merchantid + ", user=" + user + ", phone=" + phone + ", icon=" + icon + ", time=" + time
 				+ ", address=" + address + ", title=" + title + ", type=" + type + ", money=" + money + ", img_1="
 				+ img_1 + ", img_2=" + img_2 + ", img_3=" + img_3 + ", state="
-				+ state + "]";
+				+ state + ", ordertypeid=" + ordertypeid + "]";
 	}
+	
+	
 	
 	
 	

@@ -56,13 +56,13 @@ public class post_task extends HttpServlet {
 				
 				//1.(参)获取参数值，并保存到POJO对象
 				
-				String type = request.getParameter("num");//用户id
+				int type = Integer.parseInt(request.getParameter("num"));//类型id
 				int userId = Integer.parseInt(request.getParameter("userId"));//用户id
 				String requirement = request.getParameter("requirement");//订单要求
 				String phone = request.getParameter("phone");//用户手机号
 				String date = request.getParameter("date");//服务时间
 				String region = request.getParameter("region");//服务地址
-				String[] image = request.getParameterValues("images");//服务地址
+				String[] image = request.getParameterValues("images");//图片
 				Double money = Double.parseDouble(request.getParameter("money"));//佣金
 				//2.处理相关数组
 				String address = region;
@@ -84,7 +84,7 @@ public class post_task extends HttpServlet {
 				//3.将订单信息导入order对象中
 				
 				order.setUserid(userId);
-				order.setType(type);
+				order.setOrdertypeid(type);
 				order.setDescribe(requirement);
 				order.setPhone(phone);
 				order.setAddress(address);

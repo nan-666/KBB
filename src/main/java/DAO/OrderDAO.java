@@ -261,31 +261,32 @@ public class OrderDAO {
 	
 	public int insetOrder(Order order) {
         try{
-            String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`money`,`img_1`,`img_2`,`img_3`,`state`,`ordertypeid`) value ('";
+            String sql = "insert into `order`(`userid`,`phone`,`time`,`address`,`describe`,`money`,`img_1`,`img_2`,`img_3`,`ordertypeid`,`state`) value ('";
             sql = sql+order.getUserid()+"','";
             sql = sql+order.getPhone()+"','";
             sql = sql+order.getTime()+"','";
             sql = sql+order.getAddress()+"','";
             sql = sql+order.getDescribe()+"','";
-            sql = sql+order.getType()+"','";
             sql = sql+order.getMoney()+"','";
-            if(order.getImg_1().equals(null)){
+            
+            
+            if(order.getImg_1()== null){
                 sql = sql+"/"+"','";
             }else{
                 sql = sql+order.getImg_1()+"','";
             }
-            if(order.getImg_2().equals(null)){
+            if(order.getImg_2() == null){
                 sql = sql+"/"+"','";
             }else{
                 sql = sql+order.getImg_2()+"','";
             }
-            if(order.getImg_3().equals(null)){
+            if(order.getImg_3() == null){
                 sql = sql+"/"+"','";
             }else{
                 sql = sql+order.getImg_3()+"','";
             }
+            sql = sql+order.getOrdertypeid()+"','";
             sql = sql+order.getState()+"')";
-            System.out.println(sql);
             pst = (PreparedStatement) conn.prepareStatement(sql);
             int rs = pst.executeUpdate();
             return rs;
@@ -294,6 +295,31 @@ public class OrderDAO {
             return 0;
         }
     }
+	
+	//服务商接单
+	public int updateOrder(int merchantid,int id){
+		try{
+			String Sql = "select id from `merchant` where id="+merchantid;
+			pst = (PreparedStatement) conn.prepareStatement(Sql);
+			ResultSet r = pst.executeQuery();
+			if(r.next()){
+				String sql = "update `order` set merchantid = "
+					     +merchantid
+					     +",state = 2"
+					     +" where id = "
+					     +id;
+				pst = (PreparedStatement) conn.prepareStatement(sql);
+				int rs = pst.executeUpdate();
+				return rs;
+			}else{
+				return 0;
+			}
+			
+		}catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+	}
 	
 	//删除任务
 	public boolean delete(int id) throws SQLException {
