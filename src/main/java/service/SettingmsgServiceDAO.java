@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.BillDAO;
-import dao.SettingmsgDAO;
+import DAO.BillDAO;
+import DAO.SettingmsgDAO;
 import pojo.Bill;
 import pojo.User;
 import util.DButil;

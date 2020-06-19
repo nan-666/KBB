@@ -56,7 +56,7 @@ public class OrderDAO {
 					temp.setType(rs.getString("type"));
 					temp.setMoney(rs.getInt("money"));
 					temp.setImg_1(rs.getString("img_1"));
-					temp.setState(rs.getInt("state"));
+					temp.setState(rs.getString("state"));
 					rows.add(temp);
 					rs.next();
 				}
@@ -90,7 +90,6 @@ public class OrderDAO {
 					+ " and `order`.ordertypeid = `ordertype`.id";
 			pst = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
-			
 			ArrayList<Order> rows = new ArrayList<Order>();
 			if(rs.next()){
 				for(int i = 0; i < rs.getRow(); i++){
@@ -107,7 +106,7 @@ public class OrderDAO {
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
-					temp.setState(rs.getInt("state"));
+					temp.setState(rs.getString("state"));
 					rows.add(temp);	
 			    	rs.next();
 				}	
@@ -161,7 +160,7 @@ public class OrderDAO {
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
-					temp.setState(rs.getInt("state"));
+					temp.setState(rs.getString("state"));
 					rows.add(temp);
 			    	rs.next();
 				}
@@ -239,7 +238,7 @@ public class OrderDAO {
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
-					temp.setState(rs.getInt("state"));
+					temp.setState(rs.getString("state"));
 					rows.add(temp);
 					rs.next();
 				}
@@ -295,7 +294,7 @@ public class OrderDAO {
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
 					temp.setImg_3(rs.getString("img_3"));
-					temp.setState(rs.getInt("state"));
+					temp.setState(rs.getString("state"));
 					rows.add(temp);
 					rs.next();
 				}
