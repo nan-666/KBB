@@ -36,10 +36,9 @@ public class OrderDAO {
 					+ "`order`.img_3,"
 					+ "`orderstate`.state,"
 					+ "`ordertype`.type"
-					+ " from `order`,`user`,`orderstate`,`ordertype`"
-					+ " where `order`.userid = `user`.id"
-					+ " and `order`.state = `orderstate`.id"
-					+ " and `order`.ordertypeid = `ordertype`.id";
+					+ " from `order` INNER JOIN `user` on `order`.userid = `user`.id"
+					+ " INNER JOIN `orderstate` on `order`.state = `orderstate`.id"
+					+ " INNER JOIN `ordertype` on `order`.ordertypeid = `ordertype`.id";
 			pst = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			
@@ -88,11 +87,10 @@ public class OrderDAO {
 					+ "`order`.img_2,"
 					+ "`order`.img_3,"
 					+ "`orderstate`.state "
-					+ "from `order`,`user`,`orderstate`,`ordertype`"
-					+ " where `order`.userid = `user`.id"
-					+ " and `order`.state = `orderstate`.id"
-					+ " and `order`.ordertypeid = `ordertype`.id"
-					+ " and `order`.id=?";
+					+ " from `order` INNER JOIN `user` on `order`.userid = `user`.id"
+					+ " INNER JOIN `orderstate` on `order`.state = `orderstate`.id"
+					+ " INNER JOIN `ordertype` on `order`.ordertypeid = `ordertype`.id"
+					+ " where `order`.id=?";
 			pst = (PreparedStatement) conn.prepareStatement(sql);
 			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();
@@ -161,17 +159,18 @@ public class OrderDAO {
 					+"`order`.img_2,"
 					+ "`order`.img_3,"
 					+ "`orderstate`.state"
-					+ " from `order`,`user`,orderstate,ordertype"
-					+ " where title like '%"
+					+ " from `order` INNER JOIN `user` on `order`.userid = `user`.id"
+					+ " INNER JOIN `orderstate` on `order`.state = `orderstate`.id"
+					+ " INNER JOIN `ordertype` on `order`.ordertypeid = `ordertype`.id"
+					+ " where `order`.title like '%"
 					+word
-					+"%' or `describe` like '%"
+					+"%' or `order`.`describe` like '%"
 					+word
-					+ "%' and `order`.userid = `user`.id"
-					+ " and `order`.state = `orderstate`.id"
-					+ " and `order`.ordertypeid = `ordertype`.id";
+					+"%' or `ordertype`.type like '%"
+					+word
+					+"%'";
 			
 			pst = (PreparedStatement) conn.prepareStatement(sql);
-			//pst.setString(1, type);
 			
 			ResultSet rs = pst.executeQuery();
 			ArrayList<Order> rows = new ArrayList<Order>();
@@ -227,8 +226,26 @@ public class OrderDAO {
 	public ArrayList<Order> selectByTypeId(String type){
 		try{
 			int id = this.selectByType(type);
-			String sql = "select * from `order` where ordertypeid="+id;
+			String sql = "select `order`.id,"
+					+ "`order`.userid,"
+					+ "`user`.`name`,"
+					+ "`order`.phone,"
+					+ "`order`.title,"
+					+ "`order`.time,"
+					+"`ordertype`.type,"
+					+ "`order`.address,"
+					+ "`order`.`describe`,"
+					+ "`order`.money,"
+					+ "`order`.img_1,"
+					+"`order`.img_2,"
+					+ "`order`.img_3,"
+					+ "`orderstate`.state"
+					+ " from `order` INNER JOIN `user` on `order`.userid = `user`.id"
+					+ " INNER JOIN `orderstate` on `order`.state = `orderstate`.id"
+					+ " INNER JOIN `ordertype` on `order`.ordertypeid = `ordertype`.id"
+					+ " where `ordertype`.id="+id;
 			pst = (PreparedStatement) conn.prepareStatement(sql);
+			System.out.print(sql);
 			ResultSet rs = pst.executeQuery();
 			ArrayList<Order> rows = new ArrayList<Order>();
 			if(rs.next()){
@@ -236,13 +253,13 @@ public class OrderDAO {
 					Order temp = new Order();
 					temp.setId(rs.getInt("id"));
 					temp.setUserid(rs.getInt("userid"));
+					temp.setUser(rs.getString("name"));
 					temp.setPhone(rs.getString("phone"));
-					temp.setIcon(rs.getString("icon"));
-					temp.setTime(rs.getString("time"));
-					temp.setAddress(rs.getString("address"));
 					temp.setTitle(rs.getString("title"));
-					temp.setDescribe(rs.getString("describe"));
+					temp.setTime(rs.getString("time"));
 					temp.setType(rs.getString("type"));
+					temp.setAddress(rs.getString("address"));
+					temp.setDescribe(rs.getString("describe"));
 					temp.setMoney(rs.getDouble("money"));
 					temp.setImg_1(rs.getString("img_1"));
 					temp.setImg_2(rs.getString("img_2"));
