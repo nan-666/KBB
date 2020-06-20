@@ -22,13 +22,8 @@ public class SettingmsgDAO {
 		this.conn = conn;
 	}
 	
-	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone,String birthday,String information,String sort,String work){
+	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone,String address){
 		String sql="";
-		if(Integer.parseInt(gender)==0){
-			gender="男";
-		}else{
-			gender="女";
-		}
 		try{
 			
 			sql = "update `user` set nickname= '"
@@ -43,17 +38,8 @@ public class SettingmsgDAO {
 						+",phone='"
 						+phone
 						+"'"
-						+",birthday='"
-						+birthday
-						+"'"
-						+",tag='"
-						+information
-						+"'"
-						+",type='"
-						+sort
-						+"'"
-						+",industry='"
-						+work
+						+",address='"
+						+address
 						+"'"
 						+" where id="
 						+item

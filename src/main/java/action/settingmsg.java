@@ -58,12 +58,11 @@ public class settingmsg extends HttpServlet {
 		String avatarUrl=request.getParameter("avatarUrl");
 		String gender=request.getParameter("gender");
 		String phone=request.getParameter("phone");
-		String birthday=request.getParameter("birthday");
-		String information=request.getParameter("information");
-		String sort=request.getParameter("sort");
-		String work=request.getParameter("work");
+		String address=request.getParameter("address");
+		System.out.println(address);
 		
-		boolean updatetype=merchSD.updateByType(item,nickName,avatarUrl,gender,phone,birthday,information,sort,work);
+		
+		boolean updatetype=merchSD.updateByType(item,nickName,avatarUrl,gender,phone,address);
 		// 将封装数据返回到小程序端
 		out.print(updatetype);
 		
