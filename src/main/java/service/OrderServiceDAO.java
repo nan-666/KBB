@@ -160,6 +160,35 @@ public class OrderServiceDAO {
 
 	}
 	
+	/**
+	 * 立即预约
+	 * @param order
+	 * @return
+	 */
+	public int insertOrder(Order order){
+		Connection conn = DButil.getConnection();
+		OrderDAO orderD = new OrderDAO(conn);
+		try{
+
+			int res = orderD.insertOrder(order);
+			conn.commit();
+			return res;
+		}catch(Exception e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return 0;
+		}finally{
+			if(conn != null){
+				DButil.closeConnection(conn);
+			}
+		}
+
+	}
+	
 	//服务商接单
 	public int updateOrder(int merchantid,int id){
 		Connection conn = DButil.getConnection();

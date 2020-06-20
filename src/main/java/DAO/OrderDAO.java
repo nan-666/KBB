@@ -296,6 +296,27 @@ public class OrderDAO {
         }
     }
 	
+	public int insertOrder(Order order) {
+        try{
+            String sql = "insert into `order`(`userid`,`merchantid`,`phone`,`time`,`address`,`describe`,`money`,`ordertypeid`,`state`) value ('";
+            sql = sql+order.getUserid()+"','";
+            sql = sql+order.getMerchantid()+"','";
+            sql = sql+order.getPhone()+"','";
+            sql = sql+order.getTime()+"','";
+            sql = sql+order.getAddress()+"','";
+            sql = sql+order.getDescribe()+"','";
+            sql = sql+order.getMoney()+"','";
+            sql = sql+this.selectByType(order.getType())+"','";
+            sql = sql+order.getState()+"')";
+            pst = (PreparedStatement) conn.prepareStatement(sql);
+            int rs = pst.executeUpdate();
+            return rs;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+	
 	//服务商接单
 	public int updateOrder(int merchantid,int id){
 		try{
