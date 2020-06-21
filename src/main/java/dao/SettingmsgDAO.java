@@ -22,7 +22,7 @@ public class SettingmsgDAO {
 		this.conn = conn;
 	}
 	
-	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone,String address){
+	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone){
 		String sql="";
 		try{
 			
@@ -35,11 +35,8 @@ public class SettingmsgDAO {
 						+",sex='"
 						+gender
 						+"'"
-						+",phone='"
+						+",issever='"
 						+phone
-						+"'"
-						+",address='"
-						+address
 						+"'"
 						+" where id="
 						+item
@@ -83,6 +80,7 @@ public class SettingmsgDAO {
 			    		temp.setTag(rs.getString("tag"));
 			    		temp.setType(rs.getString("type"));
 			    		temp.setIndustry(rs.getString("industry"));
+			    		temp.setissever(rs.getInt("issever"));
 				    	rows.add(temp);	
 				    	rs.next();
 			    	}

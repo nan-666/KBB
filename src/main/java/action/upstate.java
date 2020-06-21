@@ -12,24 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
-import pojo.User;
-import service.SettingmsgServiceDAO;
+import pojo.BaseDataPojo;
+import pojo.order;
+import pojo.LoginSession;
+import service.OrderServiceDAO;
 
-@WebServlet("/main/java/action/settingmsg")
-/**
- * Servlet implementation class search
- */
-public class settingmsg extends HttpServlet {
+@WebServlet("/main/java/action/upstate")
+
+public class upstate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	User  merch = new  User();
-	SettingmsgServiceDAO merchSD = new SettingmsgServiceDAO();
+	order  merch = new  order();
+	OrderServiceDAO merchSD = new OrderServiceDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public settingmsg() {
+    public upstate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,15 +50,12 @@ public class settingmsg extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();		// 将响应数据写入服务器，并返回到客户端
 		
-		String item = request.getParameter("userid");//userid
-		System.out.println(item);
-		String nickName=request.getParameter("nickName");
-		String avatarUrl=request.getParameter("avatarUrl");
-		String gender=request.getParameter("gender");
-		String phone=request.getParameter("issever");
-		
-		
-		boolean updatetype=merchSD.updateByType(item,nickName,avatarUrl,gender,phone);
+		//1.(参)获取参数值，并保存到POJO对象
+		//此item系userId
+		String id = request.getParameter("id");//order中的id
+		String state = request.getParameter("state");//order中的id
+
+		boolean updatetype=merchSD.upstateType(id,state);
 		// 将封装数据返回到小程序端
 		out.print(updatetype);
 		

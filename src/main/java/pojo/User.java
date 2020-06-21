@@ -15,6 +15,14 @@ public class User {
 	private String industry;//行业
 	private String type;//类型
 	private String avatarUrl;//图片路径
+	private int issever;//判断是否是服务商
+	
+	public int getissever(){
+		return issever;
+	}
+	public void setissever(int issever){
+		this.issever=issever;
+	}
 	
 	public String getAvatarUrl(){
 		return avatarUrl;

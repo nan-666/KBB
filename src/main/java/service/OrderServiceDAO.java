@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.BillDAO;
 import dao.OrderDAO;
 import pojo.order;
 import util.DButil;
@@ -29,6 +30,38 @@ public class OrderServiceDAO {
 			      if(conn != null){
 			        DButil.closeConnection(conn);
 			      }
+		}
+	}
+	public boolean deleteType(String item) {
+		Connection conn = DButil.getConnection();
+		OrderDAO merchD = new OrderDAO(conn);
+		try{
+			merchD.deleteType(item);
+			conn.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+	public boolean upstateType(String id,String state) {
+		Connection conn = DButil.getConnection();
+		OrderDAO merchD = new OrderDAO(conn);
+		try{
+			merchD.upstateType(id,state);
+			conn.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
 		}
 	}
 

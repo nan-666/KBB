@@ -4,6 +4,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -12,7 +13,7 @@ import pojo.order;
 
 public class OrderDAO {
 	private Connection conn = null;
-	private PreparedStatement pst = null;
+	private java.sql.PreparedStatement pst = null;
 	
 	// 定义构造函数，实例化时完成连接的注入
 	public OrderDAO(Connection conn){
@@ -24,12 +25,7 @@ public class OrderDAO {
 	public ArrayList<order> searchByType(String item,String userid){
 		String sql;
 		try{
-			if(item.equals("0")){
-				sql = "select * from `order` where userid like '%"
-						+userid
-						+"%'"
-						;
-			}else{
+			
 			sql = "select * from `order` where userid like '%"
 						+userid
 						+"%'"
@@ -37,7 +33,7 @@ public class OrderDAO {
 						+item
 						+"%'"
 						;
-			}
+			
 			System.out.print(sql);
 			pst = (PreparedStatement) conn.prepareStatement(sql);
 			//pst.setString(1, type);
@@ -54,7 +50,7 @@ public class OrderDAO {
 		    		temp.setTime(rs.getTime("time"));
 		    		temp.setAddress(rs.getString("address"));
 		    		temp.setTitle(rs.getString("title"));
-		    		temp.setType(rs.getString("type"));
+		    		temp.setType(rs.getString("ordertypeid"));
 		    		temp.setMoney(rs.getInt("money"));
 		    		temp.setImg_1(rs.getString("img_1"));
 		    		temp.setState(rs.getString("state"));
@@ -66,6 +62,48 @@ public class OrderDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
+		}
+		
+	}
+	public boolean deleteType(String item){
+		String sql="";
+		try{
+			
+			sql = "delete from `order` where id= "
+						+item
+						;
+			
+			System.out.print(sql);
+			pst = conn.prepareStatement(sql);
+			//pst.setString(1, type);
+			
+			pst.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	public boolean upstateType(String id,String state){
+		String sql="";
+		try{
+			
+			sql = "update `order` set state= "
+						+state
+						+" where id="
+						+id
+						;
+			
+			System.out.print(sql);
+			pst = conn.prepareStatement(sql);
+			//pst.setString(1, type);
+			
+			pst.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 		
 	}
