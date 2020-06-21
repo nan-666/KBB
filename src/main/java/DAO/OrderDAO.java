@@ -341,7 +341,30 @@ public class OrderDAO {
             return 0;
         }
     }
-	
+	//服务商接单
+	public int updateOrder(int merchantid,int id){
+		try{
+			String Sql = "select id from `merchant` where id="+merchantid;
+			pst = (PreparedStatement) conn.prepareStatement(Sql);
+			ResultSet r = pst.executeQuery();
+			if(r.next()){
+				String sql = "update `order` set merchantid = "
+						+merchantid
+						+",state = 2"
+						+" where id = "
+						+id;
+				pst = (PreparedStatement) conn.prepareStatement(sql);
+				int rs = pst.executeUpdate();
+				return rs;
+			}else{
+				return 0;
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	//删除任务
 	public boolean delete(int id) throws SQLException {
 		try {
@@ -400,6 +423,31 @@ public class OrderDAO {
 		catch(Exception e){
 		      e.printStackTrace();
 		      return null;
+		}
+	}
+
+	public int updateAdminOrder(Order order) {
+		try {
+			String sql = "update `order` set  phone= '"
+					+ order.getPhone()
+					+ "',address = '"
+					+ order.getAddress()
+					+ "',`describe` = '"
+					+ order.getDescribe()
+					+ "',money = "
+					+ order.getMoney()
+					+ ",ordertypeid = "
+					+ order.getOrdertypeid()
+					+ " where id = "
+					+ order.getId();
+			pst = (PreparedStatement) conn.prepareStatement(sql);
+			int rs = pst.executeUpdate();
+			return rs;
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 }

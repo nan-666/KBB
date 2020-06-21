@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class UserService {
 		ArrayList<User> rows = new ArrayList<User>();
 		try {
 			rows = userDAO.searchById(id);
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -121,6 +122,29 @@ public class UserService {
 			return new BaseDataPojo<User>("删除失败", false, null);
 		} finally {
 			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+
+	public int updateAdminUser(User user) {
+		Connection conn = DButil.getConnection();
+		UserDAO userD = new UserDAO(conn);
+		try{
+
+			int res = userD.updateAdminUser(user);
+			conn.commit();
+			return res;
+		}catch(Exception e){
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return 0;
+		}finally{
+			if(conn != null){
 				DButil.closeConnection(conn);
 			}
 		}

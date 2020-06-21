@@ -14,7 +14,7 @@ import pojo.BaseDataPojo;
 import pojo.LoginSession;
 import service.LoginService;
 
-@WebServlet("/main/java/action/login/CheckLogin")
+@WebServlet("/main/java/login/CheckLogin")
 public class CheckLogin extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

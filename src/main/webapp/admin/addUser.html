@@ -211,21 +211,33 @@
 							<div class="card-body">
 								<form @submit.prevent="submit" class="row">
 									<div class="form-group">
-                    					<label for="username">用户名</label>
-                    					<input type="text" class="form-control" name="username" id="username" value="lightyear"  />
+                    					<label for="name">用户名</label>
+                    					<input type="text" class="form-control" name="name" id="name" v-model="swiperDetail.name"  />
                   					</div>
 									<div class="form-group">
                     					<label for="nickname">昵称</label>
-                    					<input type="text" class="form-control" name="nickname" id="nickname" placeholder="输入昵称" value="管理员">
+                    					<input type="text" class="form-control" name="nickname" id="nickname" placeholder="输入昵称" v-model="swiperDetail.nickname">
                   					</div>
 									<div class="form-group">
-                    					<label for="nickname">联系电话</label>
-                    					<input type="text" class="form-control" name="phone" id="phone" placeholder="输入联系电话" value="管理员">
+                    					<label for="sex">性别</label>
+                    					<input type="text" class="form-control" name="sex" id="sex" placeholder="输入联系电话" v-model="swiperDetail.sex">
                   					</div>
                   					<div class="form-group">
-                    					<label for="nickname">住址</label>
-                    					<input type="text" class="form-control" name="address" id="address" placeholder="输入地址" value="管理员">
+                    					<label for="address">住址</label>
+                    					<input type="text" class="form-control" name="address" id="address" placeholder="输入地址" v-model="swiperDetail.address">
                   					</div>
+									<div class="form-group">
+										<label for="birthday">生日</label>
+										<input type="text" class="form-control" name="birthday" id="birthday" placeholder="输入地址" v-model="swiperDetail.birthday">
+									</div>
+									<div class="form-group">
+										<label for="phone">手机号</label>
+										<input type="text" class="form-control" name="phone" id="phone" placeholder="输入地址" v-model="swiperDetail.phone">
+									</div>
+									<div class="form-group">
+										<label for="balance">余额</label>
+										<input type="text" class="form-control" name="balance" id="balance" placeholder="输入地址" v-model="swiperDetail.balance">
+									</div>
 									<div class="form-group col-md-12">
 										<label>头像</label>
 										<div class="form-controls">
@@ -236,31 +248,19 @@
 														<img v-bind:src="imgSrc">
 														<figcaption v-if="!isZoom">
 															<a class="btn btn-round btn-square btn-primary"
-																@click="viewImg"><i class="mdi mdi-eye"></i></a> <a
+															   @click="viewImg"><i class="mdi mdi-eye"></i></a> <a
 																class="btn btn-round btn-square btn-danger"
 																@click="delImg"><i class="mdi mdi-delete"></i></a>
 														</figcaption>
 													</figure>
 												</li>
 												<li class="col-xs-4 col-sm-3 col-md-2"><a
-													class="pic-add" id="add-pic-btn" title="点击上传"
-													@click="addImg"> <input type="file"
-														style="display: none;" id="fileInput"
-														@change="inputChange" />
+														class="pic-add" id="add-pic-btn" title="点击上传"
+														@click="addImg"> <input type="file"
+																				style="display: none;" id="fileInput"
+																				@change="inputChange" />
 												</a></li>
 											</ul>
-										</div>
-									</div>
-									<div class="form-group col-md-12">
-										<label for="status">状态</label>
-										<div class="clearfix">
-											<label class="lyear-radio radio-inline radio-primary">
-												<input type="radio" name="status" value="0"
-												v-model="swiperDetail.state"><span>禁用</span>
-											</label> <label class="lyear-radio radio-inline radio-primary">
-												<input type="radio" name="status" value="1" checked
-												v-model="swiperDetail.state"><span>启用</span>
-											</label>
 										</div>
 									</div>
 									<div class="form-group col-md-12">
@@ -327,12 +327,14 @@
 		data : {				// 在作用域中可绑定的数据
 			title: '',
 			swiperDetail: {
-				title:'',
-				link: '',
-				rank: 1,
-				imgUrl: '',
-				state: 1,
-				position: 1
+				name:'',
+				sex: '',
+				birthday: '',
+				phone: '',
+				nickname: '',
+				address: '',
+				balance:0,
+				avatarUrl:'',
 			},
 			file: null,
 			isZoom: false,	// 图片是否被放大
@@ -384,14 +386,14 @@
 				if(myVue.type == 'add'){	// 新增轮播图时，用新生成的key获取token，并上传
 					key = 'appIndex' + new Date().valueOf() + '.png';
 				}else{		// 编辑轮播图时，用原图片的key
-					var imgUrl = myVue.swiperDetail.imgUrl;
+					var imgUrl = myVue.swiperDetail.avatarUrl;
 					key = imgUrl.slice(imgUrl.lastIndexOf('/')+1);
 				}
 				if(file){		// 如已添加图片，先上传图片
 					// 1.从服务端获取token
 					axios({
 						method: 'post',
-						url: '/17JkCourseWeb/getToken',
+						url: '/kbb/GetQiniuToken',
 						headers:{'content-type': 'application/x-www-form-urlencoded'},
 						data: Qs.stringify({key: key})	
 					}).then((response)=>{
@@ -411,13 +413,14 @@
 	function getDetail(id){
 		axios({
 			method: 'post',
-			url: '/CourseWeb/getAppIndexDetail',
+			url: '/kbb/selectUser',
 			headers:{'content-type': 'application/x-www-form-urlencoded'},
 			data: Qs.stringify({id:id})	
 		}).then((response)=>{
 			lightyear.loading('hide');
-			myVue.swiperDetail = response.data.data;
-			myVue.imgSrc = response.data.data.imgUrl + '?a=' + new Date().valueOf();
+			console.log(response.data[0]);
+			myVue.swiperDetail = response.data[0];
+			myVue.imgSrc = myVue.swiperDetail.avatarUrl;
 		}).catch((error)=>{
 			lightyear.loading('hide');
 			console.log(error);
@@ -439,8 +442,8 @@
 			},error (err) {	// 上传错误
 			    console.log(err.message)
 			},complete (res) {	// 上传完成，上传成功后返回key和 hash
-				myVue.swiperDetail.imgUrl = 'http://qanwi3r8w.bkt.clouddn.com/' + res.key;		// 设置图片地址为七牛空间的真实url
-				myVue.imgSrc = 'http://qanwi3r8w.bkt.clouddn.com/' + res.key + '?a=' + new Date().valueOf();	// 拼接参数，去除缓存
+				myVue.swiperDetail.imgUrl = 'http://qbboxshzh.bkt.clouddn.com/image/upload/' + res.key;		// 设置图片地址为七牛空间的真实url
+				myVue.imgSrc = 'http://qbboxshzh.bkt.clouddn.com/image/upload/' + res.key + '?a=' + new Date().valueOf();	// 拼接参数，去除缓存
 				updateSwiper();
 			}
 		};
@@ -453,7 +456,7 @@
 		if(myVue.type == 'add'){
 			url = '/17JkCourseWeb/addAppIndex?type=top'
 		}else{
-			url = '/CourseWeb/updateAppIndex'
+			url = '/kbb/UpdateAdminUser'
 		}
 		axios({
 			method: 'post',

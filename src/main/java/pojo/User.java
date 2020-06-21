@@ -1,8 +1,10 @@
 package pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private int id;//id
 	private String name;//用户名
 	private String password;//密码
@@ -96,12 +98,13 @@ public class User {
 	}
 	@Override
 	public String toString() {
+
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", sex=" + sex + ", birthday="
-				+ birthday + ", phone=" + phone + ", nickname=" + nickname + ", address=" + address + ", tag=" + tag
+				+ simpleDateFormat.format(birthday) + ", phone=" + phone + ", nickname=" + nickname + ", address=" + address + ", tag=" + tag
 				+ ", industry=" + industry + ", type=" + type + ", avatarUrl=" + avatarUrl + ", balance=" + balance + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 }

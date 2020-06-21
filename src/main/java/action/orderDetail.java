@@ -52,7 +52,6 @@ public class orderDetail extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		ArrayList<Order> data = orderSD.selectById(id);
-		
 		out.print(new Gson().toJson(data));
 	}
 

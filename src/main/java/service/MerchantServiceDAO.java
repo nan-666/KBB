@@ -106,4 +106,24 @@ public class MerchantServiceDAO {
 		}
 	}
 
+	public int updateAdminMerchant(Merchant merchant) {
+		Connection conn = DButil.getConnection();
+		MerchantDAO merchantD = new MerchantDAO(conn);
+		try {
+			int res = merchantD.updateAdminMerchant(merchant);
+			conn.commit();
+			return res;
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return 0;
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
 }

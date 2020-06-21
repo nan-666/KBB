@@ -19,7 +19,16 @@ public class Merchant extends BaseDataPojo{
 	private String industry;//用户行业
 	private float balance;//用户余额
 	private float star;//商家星级
-	
+	private int state;//店铺状态
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -116,15 +125,25 @@ public class Merchant extends BaseDataPojo{
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "merchant [id=" + id + ", name=" + name + ", loginpwd=" + loginpwd + ","
-				+ "phone=" + phone + ",title=" + title + ",type=" + type + ",img=" + img + ", nickname=" + nickname + ", "
-				+ "sex=" + sex + ", birthday=" + birthday +", address=" + address + ", balance=" + balance + ",star=" + star + ",]";
+		return "Merchant{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", loginpwd='" + loginpwd + '\'' +
+				", phone='" + phone + '\'' +
+				", title='" + title + '\'' +
+				", type='" + type + '\'' +
+				", img='" + img + '\'' +
+				", nickname='" + nickname + '\'' +
+				", sex='" + sex + '\'' +
+				", birthday='" + birthday + '\'' +
+				", address='" + address + '\'' +
+				", industry='" + industry + '\'' +
+				", balance=" + balance +
+				", star=" + star +
+				", state=" + state +
+				'}';
 	}
-	
-	
-	
-	
 }

@@ -1,12 +1,11 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import pojo.Order;
+
 import pojo.User;
 import pojo.ser;
 import com.mysql.jdbc.Statement;
@@ -15,6 +14,7 @@ public class UserDAO {
 	
 	private Connection conn = null;
 	private PreparedStatement pst = null;
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	// 定义构造函数，实例化时完成连接的注入
 	public UserDAO(Connection conn){
@@ -102,7 +102,7 @@ public class UserDAO {
 		}
 	}
 	
-	public ArrayList<User> searchById(int id) throws SQLException {
+	public ArrayList<User> searchById(int id) throws SQLException, ParseException {
 		String sql = "select * from user where id=?";
 		pst = conn.prepareStatement(sql);
 		pst.setInt(1, id);
@@ -170,4 +170,33 @@ public class UserDAO {
 			return false;
 		}
 	}
+
+	public int updateAdminUser(User user) {
+		try {
+			Date birthday = new java.sql.Date( user.getBirthday().getTime());
+			String sql = "update `user` set  nickname = '"
+					+ user.getNickname()
+					+ "',sex ='"
+					+ user.getSex()
+					+ "',birthday ='"
+					+ birthday
+					+ "',address ='"
+					+user.getAddress()
+					+"',phone ='"
+					+user.getPhone()
+					+"',balance ="
+					+user.getBalance()
+					+" where id = "
+					+user.getId();
+			pst = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(sql);
+			int rs = pst.executeUpdate();
+			return rs;
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }

@@ -52,6 +52,8 @@ public class MerchantDAO {
 					temp.setImg(rs.getString("img"));
 					temp.setIndustry(rs.getString("industry"));
 					temp.setStar(rs.getFloat("star"));
+					temp.setBalance(rs.getFloat("balance"));
+					temp.setState(rs.getInt("state"));
 			    	rows.add(temp);	
 			    	rs.next();
 		    	}
@@ -83,6 +85,8 @@ public class MerchantDAO {
 					temp.setAddress(rs.getString("address"));
 					temp.setImg(rs.getString("img"));
 					temp.setIndustry(rs.getString("industry"));
+					temp.setBalance(rs.getFloat("balance"));
+					temp.setState(rs.getInt("state"));
 					temp.setStar(rs.getFloat("star"));
 					
 					rows.add(temp);	
@@ -118,7 +122,8 @@ public class MerchantDAO {
 					temp.setImg(rs.getString("img"));
 					temp.setIndustry(rs.getString("industry"));
 					temp.setStar(rs.getFloat("star"));
-					
+					temp.setBalance(rs.getFloat("balance"));
+					temp.setState(rs.getInt("state"));
 					rows.add(temp);	
 			    	rs.next();
 				}	
@@ -140,6 +145,37 @@ public class MerchantDAO {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	public int updateAdminMerchant(Merchant merchant) {
+		try {
+			String sql = "update `merchant` set  name = '"
+					+ merchant.getName()
+					+ "',title ='"
+					+ merchant.getTitle()
+					+ "',type ='"
+					+ merchant.getType()
+					+ "',address ='"
+					+merchant.getAddress()
+					+ "',img ='"
+					+merchant.getImg()
+					+"',phone ='"
+					+merchant.getPhone()
+					+"',industry ='"
+					+merchant.getIndustry()
+					+"',balance ="
+					+merchant.getBalance()
+					+" where id = "
+					+merchant.getId();
+			pst = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(sql);
+			int rs = pst.executeUpdate();
+			return rs;
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 }

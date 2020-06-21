@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import com.google.gson.GsonBuilder;
 import pojo.User;
 import service.UserService;
 
@@ -52,7 +53,8 @@ public class selectUser extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		ArrayList<User> dataPojo = userSD.searchById(id);
-		out.print(new Gson().toJson(dataPojo));
+		System.out.println(dataPojo.toString());
+		out.print(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(dataPojo));
 	}
 
 }
