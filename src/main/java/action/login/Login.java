@@ -18,7 +18,7 @@ import pojo.LoginSession;
 import service.LoginService;
 import util.HttpUtil;
 
-@WebServlet("/main/java/login/Login")
+@WebServlet("/main/java/action/login/Login")
 
 public class Login extends HttpServlet {
 	

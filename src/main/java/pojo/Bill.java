@@ -13,6 +13,12 @@ public class Bill {
 	private String odd;//订单号
 	private String information;//交易信息
 	private int balance;
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 	public int getId() {
 		return id;
 	}
@@ -60,12 +66,6 @@ public class Bill {
 	}
 	public void setInformation(String information) {
 		this.information = information;
-	}
-	public int getBalance() {
-		return balance;
-	}
-	public void setBalance(int balance) {
-		this.balance = balance;
 	}
 	
 	@Override
