@@ -22,7 +22,7 @@ public class SettingmsgDAO {
 		this.conn = conn;
 	}
 	
-	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone){
+	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone,String address,String issever){
 		String sql="";
 		try{
 			
@@ -35,8 +35,14 @@ public class SettingmsgDAO {
 						+",sex='"
 						+gender
 						+"'"
-						+",issever='"
+						+",phone='"
 						+phone
+						+"'"
+						+",address='"
+						+address
+						+"'"
+						+",issever='"
+						+issever
 						+"'"
 						+" where id="
 						+item

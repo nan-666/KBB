@@ -12,11 +12,11 @@ import util.DButil;
 
 public class SettingmsgServiceDAO {
 	
-	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone) {
+	public boolean updateByType(String item,String nickName,String avatarUrl,String gender,String phone,String address,String issever) {
 		Connection conn = DButil.getConnection();
 		SettingmsgDAO merchD = new SettingmsgDAO(conn);
 		try{
-			merchD.updateByType(item,nickName,avatarUrl,gender,phone);
+			merchD.updateByType(item,nickName,avatarUrl,gender,phone,address,issever);
 			conn.commit();
 			return true;
 		} catch (Exception e) {
